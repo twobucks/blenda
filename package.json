@@ -23,9 +23,11 @@
     "gulp": "^3.8.8",
     "highlight.js": "^8.1.0",
     "jade": "~1.3.0",
+    "lodash": "^2.4.1",
     "marked": "^0.3.2",
+    "mongoose": "^3.8.16",
     "morgan": "~1.0.0",
-    "riotjs": "^1.0.3",
+    "riotjs": "^1.0.4",
     "static-favicon": "~1.0.0",
     "stylus": "0.42.3"
   },

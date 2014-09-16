@@ -4,10 +4,29 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var fs = require('fs')
 
 var routes = require('./routes/index');
 
 var app = express();
+var db = require('./db')
+
+// Bootstrap models
+var models_path = __dirname + '/models';
+var walkModels = function (path) {
+  fs.readdirSync(path).forEach(function(file) {
+    var newPath  = path + '/' + file;
+    var stat = fs.statSync(newPath);
+    if (stat.isFile()) {
+      if (/(.*)\.js$/.test(file)) {
+        require(newPath);
+      }
+    } else if(stat.isDirectory()) {
+      walkModels(newPath);
+    }
+  });
+};
+walkModels(models_path);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
