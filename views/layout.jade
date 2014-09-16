@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/vendor/normalize.css/normalize.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/syntax.css')
+    script(src='/vendor/jquery/dist/jquery.min.js')
+    script(src='/js/bundle.js')
+
+    script(type="text/template" id="main-template")
+      { text }
+  body
+    block content
