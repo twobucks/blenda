@@ -1,18 +1,23 @@
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
 var express = require('express');
-var path = require('path');
-var favicon = require('static-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var fs = require('fs')
+    path = require('path'),
+    favicon = require('static-favicon'),
+    logger = require('morgan'),
+    cookieParser = require('cookie-parser'),
+    session = require('express-session'),
+    bodyParser = require('body-parser'),
+    fs = require('fs'),
+    routes = require('./routes/index'),
+    app = express(),
+    db = require('./db'),
+    models_path = __dirname + '/models',
+    passport = require('passport'),
+    secrets = require('./config/secret-keys'),
+    DropboxStrategy = require('passport-dropbox-oauth2').Strategy
 
-var routes = require('./routes/index');
-
-var app = express();
-var db = require('./db')
 
 // Bootstrap models
-var models_path = __dirname + '/models';
 var walkModels = function (path) {
   fs.readdirSync(path).forEach(function(file) {
     var newPath  = path + '/' + file;
@@ -28,20 +33,61 @@ var walkModels = function (path) {
 };
 walkModels(models_path);
 
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(favicon());
 app.use(logger('dev'));
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-app.use(cookieParser());
+app.use(session({ secret: secrets.sessionSecret }))
+app.use(passport.initialize())
+app.use(passport.session())
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use('/', routes);
+
+// Auth setup
+
+var mongoose = require('mongoose'),
+    User = mongoose.model('User')
+
+passport.use(new DropboxStrategy({
+    clientID: secrets.dropboxKey,
+    clientSecret: secrets.dropboxSecret,
+    callbackURL: "http://localhost:3000/connect/back"
+  },
+  function(accessToken, refreshToken, profile, done) {
+    var email = profile.emails[0].value,
+        name  = profile.displayName
+
+    User.findOrCreate({ dropboxID: profile.id }, {name: name, email: email}, function (err, user) {
+      return done(err, user);
+    });
+  }
+));
+
+app.get('/connect', passport.authenticate('dropbox-oauth2'));
+
+app.get('/connect/back',
+  passport.authenticate('dropbox-oauth2', { failureRedirect: '/' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -51,6 +97,7 @@ app.use(function(req, res, next) {
 });
 
 /// error handlers
+//
 
 // development error handler
 // will print stacktrace

@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
-    Schema   = mongoose.Schema
+    Schema   = mongoose.Schema,
+    findOrCreate = require('mongoose-findorcreate')
 
 var UserSchema = new Schema({
   email: {
@@ -8,21 +9,13 @@ var UserSchema = new Schema({
     unique: true,
     trim: true
   },
+  name: String,
   gravatar: String,
-  dropbox: {
-		token: {
-			type: String,
-			default: ''
-		},
-		email: {
-			type: String,
-			default: ''
-		},
-		cursor: {
-			type: String,
-			default: ''
-		}
+  dropboxID: {
+    type: String,
+    default: ''
   }
 })
 
+UserSchema.plugin(findOrCreate)
 mongoose.model('User', UserSchema)
