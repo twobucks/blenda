@@ -1,6 +1,10 @@
 extends layout
 
 block content
-  div(class='left')
-    textarea
-  div(class='right')
+  if authenticated
+    br
+    = user.email
+    br
+    = user.name
+  else
+    a(href="/connect") Sign in with Dropbox

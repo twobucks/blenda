@@ -72,21 +72,21 @@ passport.use(new DropboxStrategy({
   }
 ));
 
-app.get('/connect', passport.authenticate('dropbox-oauth2'));
+app.get('/connect', function(req, res, next){
+  if (req.isAuthenticated()) res.redirect('/')
+  else  next()
+}, passport.authenticate('dropbox-oauth2'));
 
-app.get('/connect/back',
-  passport.authenticate('dropbox-oauth2', { failureRedirect: '/' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  });
+app.get('/connect/back', passport.authenticate('dropbox-oauth2', { failureRedirect: '/', successRedirect: '/' }))
 
 passport.serializeUser(function(user, done) {
-  done(null, user);
+  done(null, user.id);
 });
 
-passport.deserializeUser(function(user, done) {
-  done(null, user);
+passport.deserializeUser(function(id, done) {
+  User.find(id, function(err, user){
+    done(err, user);
+  })
 });
 
 /// catch 404 and forward to error handler
