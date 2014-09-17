@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  br
+  = user.email
+  br
+  = user.name
+  br
+
+  for image in images
+    a(href=image.url)
+      img(src=image.thumb)

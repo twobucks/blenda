@@ -15,8 +15,10 @@ var express = require('express');
     passport = require('passport'),
     secrets = require('./config/secret-keys'),
     DropboxStrategy = require('passport-dropbox-oauth2').Strategy,
+    Dropbox = require('dropbox'),
     config = require('./config/config'),
-    MongoStore = require('connect-mongo')(session)
+    MongoStore = require('connect-mongo')(session),
+    async = require('async')
 
 // Bootstrap models
 var walkModels = function (path) {
@@ -97,6 +99,35 @@ passport.deserializeUser(function(id, done) {
     done(err, user);
   })
 });
+
+app.get('/stream', function(req, res){
+  var user = req.user[0]
+
+  User.findOne({email: "shime.ferovac@gmail.com"}, function(err, result){
+    if (err) throw err
+    var token = result.dropbox.token
+    var client = new Dropbox.Client({
+      key: secrets.dropboxKey,
+      secret: secrets.dropboxSecret,
+      token: token
+    })
+
+    // TODO: caching
+    var getThumbAndURL = function(entry, next){
+      var thumb = client.thumbnailUrl(entry, {size: 'xl'})
+      client.makeUrl(entry, {downloadHack: true }, function(err, url){
+        next(null, {thumb: thumb, url: url.url})
+      })
+    }
+
+    client.readdir("/", function(err, entries){
+      async.map(entries, getThumbAndURL, function(err, images){
+        res.render('stream', { user: user, images: images });
+      })
+    })
+  })
+})
+
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

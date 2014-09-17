@@ -5,8 +5,7 @@ var express = require('express'),
 router.get('/', function(req, res) {
   var authenticated = req.user
   if (authenticated){
-    var user = req.user[0]
-    res.render('index', { authenticated: authenticated, user: user });
+    res.redirect('/stream')
   } else {
     res.render('index', { authenticated: authenticated });
   }
