@@ -88,6 +88,11 @@ passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
 
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
 passport.deserializeUser(function(id, done) {
   User.find(id, function(err, user){
     done(err, user);
