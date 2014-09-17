@@ -14,8 +14,9 @@ var express = require('express');
     models_path = __dirname + '/models',
     passport = require('passport'),
     secrets = require('./config/secret-keys'),
-    DropboxStrategy = require('passport-dropbox-oauth2').Strategy
-
+    DropboxStrategy = require('passport-dropbox-oauth2').Strategy,
+    config = require('./config/config'),
+    MongoStore = require('connect-mongo')(session)
 
 // Bootstrap models
 var walkModels = function (path) {
@@ -38,19 +39,23 @@ walkModels(models_path);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(favicon());
-app.use(logger('dev'));
-app.use(cookieParser());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
-app.use(session({ secret: secrets.sessionSecret }))
+app.use(favicon())
+app.use(logger('dev'))
+app.use(cookieParser())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded())
+
+app.use(session({ secret: secrets.sessionSecret, store: new MongoStore({
+  db: config.db.split('/').pop()
+})}))
+
 app.use(passport.initialize())
 app.use(passport.session())
-app.use(require('stylus').middleware(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(require('stylus').middleware(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'dist')))
 
-app.use('/', routes);
+app.use('/', routes)
 
 // Auth setup
 
