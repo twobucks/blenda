@@ -11,9 +11,9 @@ var UserSchema = new Schema({
   },
   name: String,
   gravatar: String,
-  dropboxID: {
-    type: String,
-    default: ''
+  dropbox:{
+    id: String,
+    token: String
   }
 })
 

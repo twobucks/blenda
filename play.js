@@ -11,7 +11,8 @@ var mongoose = require('mongoose'),
 //   console.log('success')
 // })
 
-var user =  User.findBy({email: "shime.ferovac@gmail.com"}, function(err, result){
+var user =  User.findOne({email: "shime.ferovac@gmail.com"}, function(err, result){
   if (err) throw err
-  console.log(result.email)
+  var token = result.dropbox.token
+  console.log(token)
 })

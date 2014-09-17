@@ -70,8 +70,7 @@ passport.use(new DropboxStrategy({
   function(accessToken, refreshToken, profile, done) {
     var email = profile.emails[0].value,
         name  = profile.displayName
-
-    User.findOrCreate({ dropboxID: profile.id }, {name: name, email: email}, function (err, user) {
+    User.findOrCreate({ "dropbox.id": profile.id }, {name: name, email: email, "dropbox.token": accessToken }, function (err, user) {
       return done(err, user);
     });
   }
