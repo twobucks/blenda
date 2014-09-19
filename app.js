@@ -20,23 +20,6 @@ var express = require('express');
     MongoStore = require('connect-mongo')(session),
     async = require('async')
 
-// Bootstrap models
-var walkModels = function (path) {
-  fs.readdirSync(path).forEach(function(file) {
-    var newPath  = path + '/' + file;
-    var stat = fs.statSync(newPath);
-    if (stat.isFile()) {
-      if (/(.*)\.js$/.test(file)) {
-        require(newPath);
-      }
-    } else if(stat.isDirectory()) {
-      walkModels(newPath);
-    }
-  });
-};
-walkModels(models_path);
-
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -61,8 +44,7 @@ app.use('/', routes)
 
 // Auth setup
 
-var mongoose = require('mongoose'),
-    User = mongoose.model('User')
+var User = require('./models/user')
 
 passport.use(new DropboxStrategy({
     clientID: secrets.dropboxKey,
@@ -99,35 +81,6 @@ passport.deserializeUser(function(id, done) {
     done(err, user);
   })
 });
-
-app.get('/stream', function(req, res){
-  var user = req.user[0]
-
-  User.findOne({email: "shime.ferovac@gmail.com"}, function(err, result){
-    if (err) throw err
-    var token = result.dropbox.token
-    var client = new Dropbox.Client({
-      key: secrets.dropboxKey,
-      secret: secrets.dropboxSecret,
-      token: token
-    })
-
-    // TODO: caching
-    var getThumbAndURL = function(entry, next){
-      var thumb = client.thumbnailUrl(entry, {size: 'xl'})
-      client.makeUrl(entry, {downloadHack: true }, function(err, url){
-        next(null, {thumb: thumb, url: url.url})
-      })
-    }
-
-    client.readdir("/", function(err, entries){
-      async.map(entries, getThumbAndURL, function(err, images){
-        res.render('stream', { user: user, images: images });
-      })
-    })
-  })
-})
-
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

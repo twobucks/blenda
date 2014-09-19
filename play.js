@@ -1,9 +1,7 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-var mongoose = require('mongoose'),
-    db = require('./db'),
-    vaw = require('./models/user'),
-    User = mongoose.model('User'),
+var db = require('./db'),
+    User = require('./models/user'),
     Dropbox = require('dropbox'),
     secrets = require('./config/secret-keys')
 

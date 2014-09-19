@@ -18,4 +18,5 @@ var UserSchema = new Schema({
 })
 
 UserSchema.plugin(findOrCreate)
-mongoose.model('User', UserSchema)
+module.exports = mongoose.model('User', UserSchema)
+
