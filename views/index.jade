@@ -1,10 +1,4 @@
 extends layout
 
 block content
-  if authenticated
-    br
-    = user.email
-    br
-    = user.name
-  else
-    a(href="/connect") Sign in with Dropbox
+  a(href="/connect") Sign in with Dropbox
