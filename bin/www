@@ -1,6 +1,9 @@
 #!/usr/bin/env node
-var debug = require('debug')('app');
-var app = require('../app');
+var debug = require('debug')('app'),
+      app = require('../app'),
+      kue = require('kue'),
+      express = require('express'),
+      kueApp = express()
 
 app.set('port', process.env.PORT || 3000);
 

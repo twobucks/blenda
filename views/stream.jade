@@ -7,6 +7,5 @@ block content
   = user.name
   br
 
-  for image in images
-    a(href=image.url)
-      img(src=image.thumb)
+  for url in urls
+    img(src=url)

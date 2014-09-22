@@ -1,4 +1,4 @@
-# Aperture
+# Blenda
 
 Let's make photo sharing fun and simple again!
 
@@ -12,7 +12,7 @@ Data should be yours, exportable and easy to mess with.
 
 * We keep things extremely simple
 
-We don't have a proper authentication system. Sign in with Dropbox and enjoy - it takes 5 seconds for that.
+We don't have a proper authentication system. Sign in with Dropbox and enjoy - all it takes is two clicks.
 
 ## Goals
 
@@ -43,7 +43,9 @@ Technology:
 * [browserify](https://github.com/substack/node-browserify)
 * [Express](https://github.com/strongloop/express)
 * [riot.js](https://github.com/muut/riotjs)
+* [MongoDB](http://www.mongodb.org/)
 
+First make sure you have MongoDB installed and that you have started the Mongo server.
 
 ```
 npm install # will install deps
@@ -51,6 +53,9 @@ npm start # will start servers
 npm run watch # will start reloader
 npm test # will run tests
 ```
+
+We use [sharp](https://github.com/lovell/sharp#readme) for image resizing and it depends on 
+[libvips](https://github.com/jcupitt/libvips#readme), make sure you have `libvips` installed on your machine.
 
 ## License
 
