@@ -1,7 +1,8 @@
 var express     = require('express'),
     router      = express.Router(),
-    User        = require('./../models/user'),
+    Image       = require('./../models/image'),
     kue         = require('kue'),
+    pictureName = require('./../utils/picture_name'),
     jobs        = kue.createQueue()
 
 /* GET home page. */
@@ -15,24 +16,21 @@ router.get('/', function(req, res) {
 })
 
 function photoStream(req, res){
-  // TODO: this is wrong, bastards from Dropbox don't allow
-  //       sharing stuff from Dropbox in multiple sizes
-  //
-  //       API doesn't support resizing images, so we have to do it manually
-  //
-  //       Current plan:
-  //
-  //       * take stuff from Dropbox, resize them and store them on S3
-  //       * map Dropbox stuff to S3 stuff
-  //       * implement background worker with Redis
-  //
   var user = req.user[0]
 
-  job   = jobs.create('fetch-images', {
-    email: user.email
-  }).save()
+  if (user.images.length === 0){
+    // TODO: stupid, use Dropbox's cursors here
+    job   = jobs.create('fetch-images', {
+      email: user.email
+    }).save()
+  }
 
-  res.render('stream', { user: user, images: [{}] });
+  Image.find(function(err, images){
+    var images = images.map(function(image){
+      return {url: '/images/' + image.user + '/' + pictureName(image.name, 'thumb')}
+    })
+    res.render('stream', { user: user, images: images });
+  })
 }
 
 module.exports = router;

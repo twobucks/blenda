@@ -14,7 +14,11 @@ var UserSchema = new Schema({
   dropbox:{
     id: String,
     token: String
-  }
+  },
+  images: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Image'
+  }]
 })
 
 UserSchema.plugin(findOrCreate)

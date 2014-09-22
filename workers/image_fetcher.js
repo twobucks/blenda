@@ -10,21 +10,22 @@ var kue     = require('kue'),
     fs      = require('fs'),
     db      = require('./../db'),
     User    = require('./../models/user'),
+    Image   = require('./../models/image'),
     picName = require('./../utils/picture_name')
 
 jobs.process('fetch-images', 4, function(job, done){
   var email = job.data.email
 
-  User.findOne({email: email}, function(err, result){
-    if (err) throw err
+  User.findOne({email: email}, function(err, user){
+    if (err) return next(err, null)
 
-    var token  = result.dropbox.token,
+    var token  = user.dropbox.token,
         client = new Dropbox.Client({
           key: secrets.dropboxKey,
           secret: secrets.dropboxSecret,
           token: token
         }),
-        dirName = "pics/" + result.id
+        dirName = "public/images/" + user.id
 
     var getURLs = function(entry, next){
       client.makeUrl(entry, {downloadHack: true }, function(err, data){
@@ -34,6 +35,12 @@ jobs.process('fetch-images', 4, function(job, done){
             thumb       = fs.createWriteStream(dirName + "/" + picName(data.url, "thumb")),
             big         = fs.createWriteStream(dirName + "/" + picName(data.url, "large")),
             response    = request(data.url)
+
+        Image.create({name: picName(data.url), user: user.id}, function(err, image){
+          if (err) return next(err, null)
+          user.images.push(image.id)
+          user.save()
+        })
 
         response.pipe(thumbResize).pipe(thumb)
         response.pipe(bigResize).pipe(big)
