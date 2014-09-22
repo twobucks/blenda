@@ -5,6 +5,10 @@ var debug = require('debug')('app'),
       express = require('express'),
       kueApp = express()
 
+kueApp.set('port', 3001)
+kueApp.use(kue.app)
+kueApp.listen(kueApp.get('port'))
+
 app.set('port', process.env.PORT || 3000);
 
 var server = app.listen(app.get('port'), function() {

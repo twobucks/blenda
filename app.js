@@ -15,7 +15,6 @@ var express = require('express');
     passport = require('passport'),
     secrets = require('./config/secret-keys'),
     DropboxStrategy = require('passport-dropbox-oauth2').Strategy,
-    Dropbox = require('dropbox'),
     config = require('./config/config'),
     MongoStore = require('connect-mongo')(session),
     async = require('async')
