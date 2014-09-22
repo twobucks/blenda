@@ -47,6 +47,9 @@ Technology:
 
 First make sure you have MongoDB installed and that you have started the Mongo server.
 
+Image resizing is done in background jobs that are using Redis. Make sure you have Redis server
+started.
+
 ```
 npm install # will install deps
 npm start # will start servers
