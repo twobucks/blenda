@@ -21,27 +21,35 @@ module.exports = function(email, done){
         }),
         dirName = "public/images/" + user.id
 
-    var getURLs = function(entry, next){
-      client.makeUrl(entry.path, {downloadHack: true }, function(err, data){
-
-        var thumbResize = sharp().resize(600, 400).max(),
-            bigResize   = sharp().resize(1200, 1024).max(),
-            thumb       = fs.createWriteStream(dirName + "/" + picName(data.url, "thumb")),
-            big         = fs.createWriteStream(dirName + "/" + picName(data.url, "large")),
-            response    = request(data.url)
-
-        Image.create({name: picName(data.url), user: user.id}, function(err, image){
-          if (err) return next(err, null)
-          user.images.push(image.id)
+    var getURL = function(entry, next){
+      if (entry.wasRemoved){
+        Image.findOne({userId: user.id, name: picName(entry.path)}, function(err, image){
+          user.images.pull(image.id)
           user.save()
+          image.remove(next)
         })
+      } else {
+        client.makeUrl(entry.path, {downloadHack: true }, function(err, data){
 
-        response.pipe(thumbResize).pipe(thumb)
-        response.pipe(bigResize).pipe(big)
-        response.on('end', function(){
-          next(null, data.url)
+          var thumbResize = sharp().resize(600, 400).max(),
+              bigResize   = sharp().resize(1200, 1024).max(),
+              thumb       = fs.createWriteStream(dirName + "/" + picName(data.url, "thumb")),
+              big         = fs.createWriteStream(dirName + "/" + picName(data.url, "large")),
+              response    = request(data.url)
+
+          Image.create({name: picName(data.url), userId: user.id}, function(err, image){
+            if (err) return next(err, null)
+            user.images.push(image.id)
+            user.save()
+          })
+
+          response.pipe(thumbResize).pipe(thumb)
+          response.pipe(bigResize).pipe(big)
+          response.on('end', function(){
+            next(null, data.url)
+          })
         })
-      })
+      }
     }
 
     var processChanges = function(err, data){
@@ -50,7 +58,7 @@ module.exports = function(email, done){
       user.dropbox.cursor = data.cursorTag
       user.save()
 
-      async.map(data.changes, getURLs, function(err, urls){
+      async.map(data.changes, getURL, function(err, urls){
         if (err) return done(err, null)
 
         done()

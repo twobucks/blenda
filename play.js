@@ -1,10 +1,11 @@
 var db = require('./db'),
     User = require('./models/user'),
+    Image = require('./models/image'),
     Dropbox = require('dropbox'),
     secrets = require('./config/secret-keys')
 
-User.find(function(err, users){
-  console.log(users)
+User.findOne({email: "shime.ferovac@gmail.com"}, function(err, user){
+  console.log(user)
 })
 
 // var user =  User.findOne({email: "shime.ferovac@gmail.com"}, function(err, user){
