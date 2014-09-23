@@ -7,7 +7,8 @@
 
 # 23. Sep 2014
 
-* Start using Dropbox's API cursors
+[done] Start using Dropbox's API cursors
+* Improve handling of Dropbox's API change responses (support backoff, pullAgain, blankSlate, removals)
 * Start using S3
 * Most basic photo page (with bigger resolution)
 
