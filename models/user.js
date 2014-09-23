@@ -13,7 +13,9 @@ var UserSchema = new Schema({
   gravatar: String,
   dropbox:{
     id: String,
-    token: String
+    token: String,
+    cursor: String,
+    isProcessing: Boolean
   },
   images: [{
     type: Schema.Types.ObjectId,

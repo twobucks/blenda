@@ -1,0 +1,18 @@
+{
+  blankSlate: true,
+  cursorTag: 'AAG2-QebySAhAiCzZS3TEpZMVf5M2lUyqlmJtUTwrvZ96hhR6M62MFAQXqckZStyPSDByVxMe5SSDklEDUHa0k4qC7T06qQq-_mi2bCHaLeWvQ',
+  shouldPullAgain: false,
+  shouldBackOff: true,
+  changes:
+   [ { path: '/canada_010alt-2012-09-29-0813.jpg',
+       stat: [Object],
+       wasRemoved: false },
+     { path: '/windmills-2013-01-14-1618.jpg',
+       stat: [Object],
+       wasRemoved: false },
+     { path: '/n7_2_-_wallpaper_12-2013-09-02-0528.jpg',
+       stat: [Object],
+       wasRemoved: false
+     }
+  ]
+}
