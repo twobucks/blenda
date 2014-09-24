@@ -24,5 +24,13 @@ var UserSchema = new Schema({
 })
 
 UserSchema.plugin(findOrCreate)
+
+UserSchema.methods.resetDropbox = function(next){
+  var next = next || function(){}
+  this.dropbox.cursor = null
+  this.dropbox.isProcessing = false
+  this.save(next(this))
+}
+
 module.exports = mongoose.model('User', UserSchema)
 

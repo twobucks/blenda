@@ -5,7 +5,7 @@ var db = require('./db'),
     secrets = require('./config/secret-keys')
 
 User.findOne({email: "shime.ferovac@gmail.com"}, function(err, user){
-  console.log(user)
+    console.log(user)
 })
 
 // var user =  User.findOne({email: "shime.ferovac@gmail.com"}, function(err, user){
