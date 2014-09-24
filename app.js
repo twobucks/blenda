@@ -86,6 +86,12 @@ app.use(function(req, res, next) {
     next(err);
 });
 
+
+app.post('sync', function(req, res){
+  res.render('index')
+})
+
+
 /// error handlers
 //
 

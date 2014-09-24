@@ -11,4 +11,7 @@ html
     script(type="text/template" id="main-template")
       { text }
   body
+    form(action="/sync" method="post" id="form")
+      input(type="submit" value="Sync with Dropbox")
+
     block content

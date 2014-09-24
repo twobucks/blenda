@@ -15,8 +15,15 @@ router.get('/', function(req, res) {
   }
 })
 
+router.post('/sync', function(req, res){
+  processDropbox(req.user[0])
+  res.redirect('/')
+})
+
 function processDropbox(user){
   // TODO: progress
+  if (user.dropbox.isProcessing) return
+
   user.dropbox.isProcessing = true
   user.save()
 
@@ -38,7 +45,7 @@ function processDropbox(user){
 function photoStream(req, res){
   var user = req.user[0]
 
-  if (!user.dropbox.isProcessing) processDropbox(user)
+  if (user.images.length == 0) processDropbox(user)
 
   Image.find(function(err, images){
     var images = images.map(function(image){
