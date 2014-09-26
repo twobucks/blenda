@@ -1,13 +1,15 @@
-var db      = require('./../db'),
-    User    = require('./../models/user'),
-    Image   = require('./../models/image'),
-    sharp   = require('sharp'),
-    fs      = require('fs'),
-    Dropbox = require('dropbox'),
-    secrets = require('./../config/secret-keys'),
-    async   = require('async'),
-    request = require('request'),
-    picName = require('./picture_name')
+var db          = require('./../db'),
+    User        = require('./../models/user'),
+    Image       = require('./../models/image'),
+    sharp       = require('sharp'),
+    fs          = require('fs'),
+    Dropbox     = require('dropbox'),
+    secrets     = require('./../config/secret-keys'),
+    async       = require('async'),
+    request     = require('request'),
+    picName     = require('./picture_name')
+    AWS         = require('aws-sdk'),
+    s3stream    = require('s3-upload-stream')
 
 module.exports = function(email, job, done){
   User.findOne({email: email}, function(err, user){
@@ -29,30 +31,17 @@ module.exports = function(email, job, done){
     var makePull = function(entry, next){
       client.stat(entry.path, function(err, meta){
         client.makeUrl(entry.path, {downloadHack: true }, function(err, data){
-          var AWS         = require('aws-sdk'),
-              response    = request(data.url),
-              s3          = new AWS.S3()
+          s3stream.client(new AWS.S3())
 
-          var resize = sharp().resize(600, 400).max().toBuffer(function(err, buffer){
-            if (err) next(err)
-            console.log('resized: ' + picName(data.url))
-
-            s3.putObject({
-              "Bucket": "blenda",
-              "Key": picName(data.url, "thumb"),
-              "ACL": "public-read",
-              "ContentType": meta.mimeType,
-              "Body": buffer
-            }, function(err){
-              if (err){
-                console.log(err)
-                next(err)
-              } else {
-                console.log('uploaded: ' + picName(data.url))
-                next()
-              }
-            })
-          })
+          var response = request(data.url),
+              upload   = new s3stream.upload({
+                "Bucket": "blenda",
+                "Key": picName(data.url, "thumb"),
+                "ACL": "public-read",
+                "ContentType": meta.mimeType
+              }),
+              thumbResize = sharp().resize(600, 400).max(),
+              bigResize   = sharp().resize(1200, 1024).max()
 
           Image.create({name: picName(data.url), userId: user.id}, function(err, image){
             if (err) return next(err, null)
@@ -60,11 +49,20 @@ module.exports = function(email, job, done){
             user.save()
           })
 
+          upload.on('error', function(error){
+            console.log(error)
+            next(error)
+          })
+
+          upload.on('uploaded', function(){
+            console.log('uploaded: ' + picName(data.url))
+            next()
+          })
           console.log('upload started: ' + picName(data.url))
-          response.pipe(resize)
+
+          response.pipe(thumbResize).pipe(upload)
         })
       })
-
     }
 
     var getURL = function(entry, next){
@@ -96,6 +94,7 @@ module.exports = function(email, job, done){
 
       async.map(data.changes, getURL, function(err, attrs){
         if (err) return done(err, null)
+        console.log('done')
         done()
       })
     }

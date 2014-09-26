@@ -41,7 +41,7 @@
     "passport-dropbox-oauth2": "^0.1.6",
     "request": "^2.44.0",
     "riotjs": "^1.0.4",
-    "s3-upload-stream": "^1.0.0",
+    "s3-upload-stream": "^1.0.2",
     "sharp": "^0.6.2",
     "static-favicon": "~1.0.0",
     "stylus": "0.42.3"
