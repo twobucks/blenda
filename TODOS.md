@@ -14,8 +14,14 @@
 [done] add button for syncing with Dropbox
 
 # 25. Sep 2014
-* Ditch Kue in favor of Bull
-* Start streaming from Dropbox to S3
+[done] Ditch Kue in favor of Bull - changed my mind
+
+# 26. Sep 2014
+[done] Start streaming from Dropbox to S3
+[done] Stream multiple photos and multiple photo sizes in paralel
+
+# 27. Sep 2014
+* Save photos stored on S3 into the DB
 * Most basic photo page (with bigger resolution)
 
 # Later

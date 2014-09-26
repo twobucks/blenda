@@ -32,35 +32,44 @@ module.exports = function(email, job, done){
       client.stat(entry.path, function(err, meta){
         client.makeUrl(entry.path, {downloadHack: true }, function(err, data){
           s3stream.client(new AWS.S3())
+          var response = request(data.url)
 
-          var response = request(data.url),
-              upload   = new s3stream.upload({
-                "Bucket": "blenda",
-                "Key": picName(data.url, "thumb"),
-                "ACL": "public-read",
-                "ContentType": meta.mimeType
-              }),
-              thumbResize = sharp().resize(600, 400).max(),
-              bigResize   = sharp().resize(1200, 1024).max()
+          async.map(Object.keys(sizes), function(size, next){
+            var upload   = new s3stream.upload({
+              "Bucket": "blenda",
+              "Key": picName(data.url, size),
+              "ACL": "public-read",
+              "ContentType": meta.mimeType
+            })
 
-          Image.create({name: picName(data.url), userId: user.id}, function(err, image){
-            if (err) return next(err, null)
-            user.images.push(image.id)
-            user.save()
-          })
+            var resizer = sharp()
+            var resize  = resizer.resize.
+              apply(resizer, sizes[size]).max()
 
-          upload.on('error', function(error){
-            console.log(error)
-            next(error)
-          })
+            upload.on('error', function(error){
+              console.log(error)
+              next(error)
+            })
 
-          upload.on('uploaded', function(){
-            console.log('uploaded: ' + picName(data.url))
+            upload.on('uploaded', function(){
+              console.log('uploaded: ' + picName(data.url, size))
+              next()
+            })
+            console.log('upload started: ' + picName(data.url, size))
+
+            response.pipe(resize).pipe(upload)
+          }, function(err, result){
+            if (err) next(err)
             next()
           })
-          console.log('upload started: ' + picName(data.url))
 
-          response.pipe(thumbResize).pipe(upload)
+          // TODO: yeah, save images
+          //
+          // Image.create({name: picName(data.url), userId: user.id}, function(err, image){
+          //   if (err) return next(err, null)
+          //   user.images.push(image.id)
+          //   user.save()
+          // })
         })
       })
     }
