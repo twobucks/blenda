@@ -5,7 +5,11 @@ var db = require('./db'),
     secrets = require('./config/secret-keys')
 
 User.findOne({email: "shime.ferovac@gmail.com"}, function(err, user){
-    console.log(user)
+  console.log(user.dropbox.isProcessing)
+  user.resetDropbox(function(err, user){
+    console.log(user.dropbox.isProcessing)
+    process.exit()
+  })
 })
 
 // var user =  User.findOne({email: "shime.ferovac@gmail.com"}, function(err, user){

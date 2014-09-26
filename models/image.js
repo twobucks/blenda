@@ -3,6 +3,7 @@ var mongoose = require('mongoose'),
 
 var ImageSchema = new Schema({
   name: String,
+  url: String,
   userId: {
     type: Schema.Types.ObjectId,
     ref: 'User'

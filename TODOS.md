@@ -9,7 +9,13 @@
 
 [done] Start using Dropbox's API cursors
 [done] Improve handling of Dropbox's API change responses (blankSlate, removals)
-* Start using S3
+
+# 24. Sep 2014
+[done] add button for syncing with Dropbox
+
+# 25. Sep 2014
+* Ditch Kue in favor of Bull
+* Start streaming from Dropbox to S3
 * Most basic photo page (with bigger resolution)
 
 # Later
@@ -28,3 +34,6 @@
 
 * polling for Dropbox changes, how should that be achieved?
 > button for syncing with dropbox and web hooks support
+
+* pngs and libvips errors: https://github.com/lovell/sharp/issues/73
+
