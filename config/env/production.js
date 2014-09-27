@@ -1,9 +1,8 @@
 module.exports = {
-	db: 'mongodb://localhost/aperture',
+	db: 'mongodb://localhost/blenda',
 	port: 3000,
-	clientCallback: 'app.useoctobox.com:80',
 	portSecure: 8080,
 	app: {
-		name: 'Aperture'
+		name: 'Blenda'
 	}
 }

@@ -1,8 +1,8 @@
 module.exports = {
-	db: 'mongodb://localhost/aperture-dev',
+	db: 'mongodb://localhost/blenda-dev',
 	clientCallback: 'localhost:3000',
 	port: 3000,
 	app: {
-		name: 'Aperture - Development'
+		name: 'Blenda - Development'
 	}
 }
