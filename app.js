@@ -14,7 +14,7 @@ var express = require('express');
     secrets = require('./config/secret-keys'),
     DropboxStrategy = require('passport-dropbox-oauth2').Strategy,
     config = require('./config/config'),
-    MongoStore = require('connect-mongo')(session),
+    RedisStore = require('connect-redis')(session),
     async = require('async')
 
 // view engine setup
@@ -27,9 +27,7 @@ app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded())
 
-app.use(session({ secret: secrets.sessionSecret, store: new MongoStore({
-  db: config.db.split('/').pop()
-})}))
+app.use(session({ secret: secrets.sessionSecret, store: new RedisStore()}))
 
 app.use(passport.initialize())
 app.use(passport.session())

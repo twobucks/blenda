@@ -20,7 +20,7 @@
     "aws-sdk": "^2.0.17",
     "body-parser": "~1.0.0",
     "bull": "^0.1.10",
-    "connect-mongo": "^0.4.1",
+    "connect-redis": "^2.1.0",
     "cookie-parser": "~1.0.1",
     "debug": "~0.7.4",
     "dropbox": "^0.10.3",
