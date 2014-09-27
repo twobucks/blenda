@@ -34,7 +34,7 @@ module.exports = function(email, job, done){
           s3stream.client(new AWS.S3())
           var response = request(data.url)
 
-          async.map(Object.keys(sizes), function(size, next){
+          var performUpload = function(size, next){
             var upload   = new s3stream.upload({
               "Bucket": "blenda",
               "Key": picName(data.url, size),
@@ -51,25 +51,35 @@ module.exports = function(email, job, done){
               next(error)
             })
 
-            upload.on('uploaded', function(){
+            upload.on('uploaded', function(details){
               console.log('uploaded: ' + picName(data.url, size))
-              next()
+              console.log('details: ' + details.Location)
+
+              next(null, picName(data.url))
             })
             console.log('upload started: ' + picName(data.url, size))
 
             response.pipe(resize).pipe(upload)
-          }, function(err, result){
-            if (err) next(err)
-            next()
-          })
+          }
 
-          // TODO: yeah, save images
-          //
-          // Image.create({name: picName(data.url), userId: user.id}, function(err, image){
-          //   if (err) return next(err, null)
-          //   user.images.push(image.id)
-          //   user.save()
-          // })
+          async.map(Object.keys(sizes), performUpload, function(err, pics){
+            if (err) return next(err)
+
+            var pics = pics.filter(function(value, index, self){
+              return self.indexOf(value) === index
+            })
+
+            async.each(pics, function(pic, next){
+              Image.create({userId: user.id, fullName: pic}, function(err, image){
+                if (err) return next(err)
+                user.images.push(image.id)
+                user.save(next)
+              })
+            }, function(err, result){
+              if (err) return next(err)
+              next()
+            })
+          })
         })
       })
     }
@@ -102,7 +112,7 @@ module.exports = function(email, job, done){
         blankSlate()
 
       async.map(data.changes, getURL, function(err, attrs){
-        if (err) return done(err, null)
+        if (err) return done(err)
         console.log('done')
         done()
       })

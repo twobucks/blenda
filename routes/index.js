@@ -49,7 +49,7 @@ function photoStream(req, res){
 
   Image.find(function(err, images){
     var images = images.map(function(image){
-      return {url: '/images/' + image.userId + '/' + pictureName(image.name, 'thumb')}
+      return {url: image.location('thumb') }
     })
     res.render('stream', { user: user, images: images });
   })

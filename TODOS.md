@@ -21,7 +21,8 @@
 [done] Stream multiple photos and multiple photo sizes in paralel
 
 # 27. Sep 2014
-* Save photos stored on S3 into the DB
+[done] Save photos stored on S3 into the DB
+* Use Redis for session storage
 * Most basic photo page (with bigger resolution)
 
 # Later
@@ -32,7 +33,6 @@
 * Display trending photos on the main page
 * Proper notifications and progress bar
 
-
 # brain.dump
 
 * do we need to add support for backoff and pullAgain for Dropbox change?
@@ -42,4 +42,3 @@
 > button for syncing with dropbox and web hooks support
 
 * pngs and libvips errors: https://github.com/lovell/sharp/issues/73
-
