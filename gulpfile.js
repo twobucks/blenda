@@ -3,12 +3,6 @@ var gulp = require('gulp'),
     browserify = require('gulp-browserify'),
     concat = require('gulp-concat');
 
-gulp.task('lint', function() {
-  gulp.src(['./**/*.js', '!./node_modules/**', '!./dist/**', '!./public/vendor/**'])
-  .pipe(jshint())
-  .pipe(jshint.reporter('default'));
-});
-
 gulp.task('browserify', function() {
   gulp.src(['./public/javascripts/main.js'])
   .pipe(browserify({
@@ -20,11 +14,7 @@ gulp.task('browserify', function() {
   .pipe(gulp.dest('dist/js'));
 });
 
-gulp.task('watch', ['browserify', 'lint'], function() {
-  gulp.watch(['./**/*.js', '!./node_modules/**', '!./dist/**', '!./public/vendor/**'], [
-    'lint'
-  ]);
-
+gulp.task('watch', ['browserify'], function() {
   gulp.watch(['./public/javascripts/**/*.js'], ['browserify']);
 });
 
