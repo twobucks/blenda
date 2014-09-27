@@ -105,8 +105,8 @@ module.exports = function(email, job, done){
     var processChanges = function(err, data){
       if (err) return done(err, null)
 
-      // user.dropbox.cursor = data.cursorTag
-      // user.save()
+      user.dropbox.cursor = data.cursorTag
+      user.save()
 
       if (data.blankSlate && user.images.length > 0)
         blankSlate()
