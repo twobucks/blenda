@@ -47,7 +47,7 @@ function photoStream(req, res){
 
   if (user.images.length == 0) processDropbox(user)
 
-  Image.find(function(err, images){
+  Image.find().sort({updatedAt: -1}).exec(function(err, images){
     var images = images.map(function(image){
       return {url: image.location('thumb') }
     })

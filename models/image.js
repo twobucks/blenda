@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
     Schema   = mongoose.Schema,
-    picName  = require('../utils/picture_name')
+    picName  = require('../utils/picture_name'),
+    timestamps = require('mongoose-timestamp')
 
 var ImageSchema = new Schema({
   fullName: String,
@@ -9,6 +10,8 @@ var ImageSchema = new Schema({
     ref: 'User'
   }
 })
+
+ImageSchema.plugin(timestamps)
 
 var S3URL = "https://blenda.s3.amazonaws.com/"
 

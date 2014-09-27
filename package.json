@@ -36,6 +36,7 @@
     "mime": "^1.2.11",
     "mongoose": "^3.8.16",
     "mongoose-findorcreate": "^0.1.2",
+    "mongoose-timestamp": "^0.3.0",
     "morgan": "~1.0.0",
     "passport": "^0.2.1",
     "passport-dropbox-oauth2": "^0.1.6",
