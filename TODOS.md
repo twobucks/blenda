@@ -23,14 +23,19 @@
 # 27. Sep 2014
 [done] Save photos stored on S3 into the DB
 [done] Use Redis for session storage
+
+# 09. Oct 2014
+[done] basic horizontal scrolling with keyboard arrows
+* Animate scrolling effect
+* Horizontal scroll with mouse
+* Center images and focus out other images
+
 * Most basic photo page (with bigger resolution)
-
-# Later
-
-* Photo upload (to Dropbox)
+* Gravatar
+* Proper notifications and progress bar
 * Likes and followers
 * Display trending photos on the main page
-* Proper notifications and progress bar
+* Photo upload (to Dropbox)
 * Dropbox supports web hooks for changes, we should support it too
 
 # brain.dump
