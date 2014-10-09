@@ -86,7 +86,7 @@ module.exports = function(email, job, done){
 
     var getURL = function(entry, next){
       if (entry.wasRemoved){
-        Image.findOne({userId: user.id, name: picName(entry.path)}, function(err, image){
+        Image.findOne({userId: user.id, fullName: picName(entry.path)}, function(err, image){
           user.images.pull(image.id)
           user.save()
           image.remove(next)

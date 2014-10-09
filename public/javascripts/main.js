@@ -1,13 +1,16 @@
-var presenter = require('./presenter'),
-    Entry = require('./entry')
+var imagesLoaded = require('imagesloaded')
+
 
 $(function(){
-  var model = new Entry()
-
-  $("textarea").html("ready to make some riot?")
-
-  presenter($("textarea"), {
-    template: $("#main-template").html(),
-    model: model
-  })
+  $('.item').hide()
+  var container = $('#container');
+  imagesLoaded(container, function(){
+    $(".item").show()
+    container.masonry({
+      itemSelector : '.item',
+      columnWidth : 200,
+      singleMode: true
+    });
+  });
 })
+
