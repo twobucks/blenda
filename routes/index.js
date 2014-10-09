@@ -3,7 +3,8 @@ var express     = require('express'),
     Image       = require('./../models/image'),
     kue         = require('kue'),
     pictureName = require('./../utils/picture_name'),
-    jobs        = kue.createQueue()
+    listFiles   = require('./../utils/list_files')
+    jobs        = kue.createQueue(),
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -48,10 +49,15 @@ function photoStream(req, res){
   if (user.images.length == 0) processDropbox(user)
 
   Image.find().sort({updatedAt: -1}).exec(function(err, images){
-    var images = images.map(function(image){
-      return {url: image.location('large') }
+    // var images = images.map(function(image){
+    //   return {url: image.location('large') }
+    // })
+    //
+    listFiles('./public/images', function(err, images){
+      images = images.map(function(image) { return {url: '/images/' + image}})
+      console.log(images)
+      res.render('stream', { user: user, images: images });
     })
-    res.render('stream', { user: user, images: images });
   })
 }
 

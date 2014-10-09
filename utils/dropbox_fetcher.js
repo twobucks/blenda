@@ -1,13 +1,13 @@
 var db          = require('./../db'),
     User        = require('./../models/user'),
     Image       = require('./../models/image'),
-    sharp       = require('sharp'),
     fs          = require('fs'),
     Dropbox     = require('dropbox'),
     secrets     = require('./../config/secret-keys'),
     async       = require('async'),
     request     = require('request'),
-    picName     = require('./picture_name')
+    picName     = require('./picture_name'),
+    resizer     = require('./resizer'),
     AWS         = require('aws-sdk'),
     s3stream    = require('s3-upload-stream')
 
@@ -23,11 +23,6 @@ module.exports = function(email, job, done){
         }),
         dirName = "public/images/" + user.id
 
-    var sizes  = {
-      thumb: [600, 400],
-      large: [1200, 1024]
-    }
-
     var makePull = function(entry, next){
       client.stat(entry.path, function(err, meta){
         client.makeUrl(entry.path, {downloadHack: true }, function(err, data){
@@ -42,9 +37,7 @@ module.exports = function(email, job, done){
               "ContentType": meta.mimeType
             })
 
-            var resizer = sharp()
-            var resize  = resizer.resize.
-              apply(resizer, sizes[size]).max()
+            var resize = resizer(size)
 
             upload.on('error', function(error){
               console.log(error)
@@ -62,7 +55,7 @@ module.exports = function(email, job, done){
             response.pipe(resize).pipe(upload)
           }
 
-          async.map(Object.keys(sizes), performUpload, function(err, pics){
+          async.map(['thumb', 'large'], performUpload, function(err, pics){
             if (err) return next(err)
 
             var pics = pics.filter(function(value, index, self){
