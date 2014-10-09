@@ -22,23 +22,28 @@
 
 # 27. Sep 2014
 [done] Save photos stored on S3 into the DB
-* Use Redis for session storage
+[done] Use Redis for session storage
 * Most basic photo page (with bigger resolution)
 
 # Later
 
-* Figure out how to cache stuff. Do we cache stuff? Redis?
 * Photo upload (to Dropbox)
 * Likes and followers
 * Display trending photos on the main page
 * Proper notifications and progress bar
+* Dropbox supports web hooks for changes, we should support it too
 
 # brain.dump
 
 * do we need to add support for backoff and pullAgain for Dropbox change?
 > probably not, but okay
 
+* pngs and libvips errors: https://github.com/lovell/sharp/issues/73
+
+# answers
+
 * polling for Dropbox changes, how should that be achieved?
 > button for syncing with dropbox and web hooks support
 
-* pngs and libvips errors: https://github.com/lovell/sharp/issues/73
+* Figure out how to cache stuff. Do we cache stuff? Redis?
+> no
