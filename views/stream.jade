@@ -8,6 +8,7 @@ block content
   br
 
   div(id='container')
-    for image in images
-      div(class='item')
-        img(src=image.url)
+    ul(class='images')
+      for image in images
+        li
+          img(src=image.url)

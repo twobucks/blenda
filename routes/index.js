@@ -49,7 +49,7 @@ function photoStream(req, res){
 
   Image.find().sort({updatedAt: -1}).exec(function(err, images){
     var images = images.map(function(image){
-      return {url: image.location('thumb') }
+      return {url: image.location('large') }
     })
     res.render('stream', { user: user, images: images });
   })

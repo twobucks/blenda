@@ -23,6 +23,14 @@ textarea {
   width: 49%;
   height: 100%;
 }
-#container {
-  height: 300px;
+ul.images {
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+  width: 100%;
+  overflow-x: auto;
+}
+ul.images li {
+  display: inline;
+  margin-right: 5px;
 }
