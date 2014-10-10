@@ -29,7 +29,7 @@
 [done] Animate scrolling effect
 
 # 10. Oct 2014
-* Center images and focus out other images
+[done] Center images and focus out other images
 * Gravatar
 
 * Most basic photo page (with bigger resolution)

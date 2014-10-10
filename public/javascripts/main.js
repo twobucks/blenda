@@ -16,12 +16,21 @@ $(function(){
     var images = $('ul.images'),
         active = $('ul.images li.active')
 
+    var leftPosition = function(target){
+        var position = images.scrollLeft() + target.position().left
+
+        // respect margins where they exist
+        if (! target.is(':first-child')) position += 40
+
+        // center it on page
+        position -= (images.width() - target.width()) / 2
+        return position
+    }
+
     var markActive = function(target){
       if (target.length > 0){
-        var leftPosition = images.scrollLeft() + target.position().left
-        if (! target.is(':first-child')) leftPosition += 40
         images.animate({
-          scrollLeft: leftPosition
+          scrollLeft: leftPosition(target)
         }, 200)
         active.removeClass('active')
         target.addClass('active')
