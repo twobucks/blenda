@@ -7,10 +7,14 @@ body {
 a {
   color: #00b7ff;
 }
+#container {
+  overflow: hidden;
+}
 ul.images {
   margin: 0;
   font-size: 0;
   padding: 0;
+  padding-bottom: 1000px;
   white-space: nowrap;
   overflow-x: auto;
 }
