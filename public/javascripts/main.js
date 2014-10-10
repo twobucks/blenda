@@ -4,7 +4,10 @@ $(function(){
 
   var keyCodes = {
     '37': 'left',
-    '39': 'right'
+    '39': 'right',
+    '32': 'space',
+    '72': 'h',
+    '76': 'l'
   }
 
   $('body').keydown(function(e){
@@ -25,9 +28,12 @@ $(function(){
 
     switch(keyCodes[e.keyCode]){
       case 'left':
+      case 'h':
         markActive(active.prev('li'))
         break
       case 'right':
+      case 'l':
+      case 'space':
         markActive(active.next('li'))
         break
     }

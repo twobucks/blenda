@@ -26,12 +26,14 @@
 
 # 09. Oct 2014
 [done] basic horizontal scrolling with keyboard arrows
-* Animate scrolling effect
+[done] Animate scrolling effect
+
+# 10. Oct 2014
 * Horizontal scroll with mouse
 * Center images and focus out other images
+* Gravatar
 
 * Most basic photo page (with bigger resolution)
-* Gravatar
 * Proper notifications and progress bar
 * Likes and followers
 * Display trending photos on the main page
