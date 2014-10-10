@@ -24,13 +24,15 @@ textarea {
   height: 100%;
 }
 ul.images {
-  margin: 0;
   padding: 0;
+  margin: 0;
   white-space: nowrap;
   width: 100%;
   overflow-x: auto;
 }
 ul.images li {
   display: inline;
-  margin-right: 5px;
+}
+ul.images li + li {
+  margin-left: 40px;
 }

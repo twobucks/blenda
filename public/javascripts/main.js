@@ -16,7 +16,7 @@ $(function(){
     var markActive = function(target){
       if (target.length > 0){
         images.animate({
-          scrollLeft: images.scrollLeft() + target.position().left
+          scrollLeft: images.scrollLeft() + target.position().left + 40
         }, 200)
         active.removeClass('active')
         target.addClass('active')
