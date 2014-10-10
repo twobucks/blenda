@@ -18,8 +18,10 @@ $(function(){
 
     var markActive = function(target){
       if (target.length > 0){
+        var leftPosition = images.scrollLeft() + target.position().left
+        if (! target.is(':first-child')) leftPosition += 40
         images.animate({
-          scrollLeft: images.scrollLeft() + target.position().left + 40
+          scrollLeft: leftPosition
         }, 200)
         active.removeClass('active')
         target.addClass('active')

@@ -29,7 +29,6 @@
 [done] Animate scrolling effect
 
 # 10. Oct 2014
-* Horizontal scroll with mouse
 * Center images and focus out other images
 * Gravatar
 
@@ -39,6 +38,7 @@
 * Display trending photos on the main page
 * Photo upload (to Dropbox)
 * Dropbox supports web hooks for changes, we should support it too
+* Horizontal scroll with mouse? watch out, this shit is weird - spent 2 hrs on it and did nothing
 
 # brain.dump
 
