@@ -23,10 +23,18 @@ ul.images li {
 }
 ul.images li img {
   opacity: 0.2;
+  margin: auto;
+  vertical-align: middle;
+  position: relative;
+  z-index: 0;
 }
 ul.images li.active img {
   opacity: 1;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  position: relative;
 }
 ul.images li + li {
-  margin-left: 40px;
+  margin-left: -50px;
 }

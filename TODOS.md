@@ -30,8 +30,8 @@
 
 # 10. Oct 2014
 [done] Center images and focus out other images
-* Gravatar
 
+* Gravatar
 * Most basic photo page (with bigger resolution)
 * Proper notifications and progress bar
 * Likes and followers
