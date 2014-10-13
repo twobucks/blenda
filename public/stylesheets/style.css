@@ -2,30 +2,9 @@ html,
 body {
   height: 100%;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  overflow: hidden;
 }
 a {
   color: #00b7ff;
-}
-.grid-wrap {
-  clear: both;
-  margin: 0 auto;
-  padding: 0;
-  max-width: 1300px;
-}
-.grid {
-  margin: 30px auto;
-  padding: 0;
-  min-height: 500px;
-  list-style: none;
-}
-.grid li {
-  display: inline-block;
-  overflow: hidden;
-  width: 314px;
-  text-align: left;
-  vertical-align: top;
-  margin: 5px;
 }
 ul.images {
   margin: 0;

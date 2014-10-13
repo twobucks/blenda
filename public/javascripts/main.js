@@ -52,11 +52,14 @@ $(function(){
     }
   })
 
-  imagesLoaded($('.grid'), function(){
-    new Masonry('.grid', {
-      itemSelector: 'li',
-      isFitWidth: true,
-      transitionDuration: 0
+  imagesLoaded(document.querySelector('.grid'), function(){
+    $('img').each(function(){
+      $(this).attr('data-height', $(this).height())
+      $(this).attr('data-width', $(this).width())
+    })
+    new HorizontalGridPacking(document.querySelector('.grid'), {
+      height: 500,
+      padding: 2
     })
   })
 })

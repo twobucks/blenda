@@ -5,14 +5,10 @@ html
     link(rel='stylesheet', href='/vendor/normalize.css/normalize.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/syntax.css')
+    link(rel='stylesheet', href='/vendor/horizontal-grid-packing/dist/horizontal-grid-packing.css')
     script(src='/vendor/jquery/dist/jquery.min.js')
-    script(src='/vendor/masonry/dist/masonry.pkgd.js')
+    script(src='/vendor/horizontal-grid-packing/dist/horizontal-grid-packing.js')
     script(src='/js/bundle.js')
 
-    script(type="text/template" id="main-template")
-      { text }
   body
-    form(action="/sync" method="post" id="form")
-      input(type="submit" value="Sync with Dropbox")
-
     block content

@@ -4,6 +4,6 @@
   "dependencies": {
     "normalize.css": "~3.0.1",
     "jquery": "~2.1.1",
-    "masonry": "~3.1.5"
+    "horizontal-grid-packing": "~0.1.4"
   }
 }

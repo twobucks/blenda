@@ -6,7 +6,7 @@ var listFiles = require('./../utils/list_files'),
 
 listFiles('./public/images/raw', function(err, files){
   files.forEach(function(file){
-    var resize = sharp().resize(314).max()
+    var resize = sharp().resize(null, 500).max().rotate()
     var name = picName(file, 'large')
     var orig = path.resolve('./public/images/raw') + "/" + file
     var dest = path.resolve('./public/images') + "/" + name
