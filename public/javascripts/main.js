@@ -1,4 +1,5 @@
-var imagesLoaded = require('imagesloaded')
+var imagesLoaded          = require('imagesloaded'),
+    raf                   = require('raf')
 
 $(function(){
   $('.images').focus()
@@ -20,9 +21,6 @@ $(function(){
 
     var leftPosition = function(target){
         var position = images.scrollLeft() + target.position().left
-
-        // respect margins where they exist
-        // if (! target.is(':first-child')) position += 40
 
         // center it on page
         position -= (images.width() - target.width()) / 2
@@ -52,14 +50,37 @@ $(function(){
     }
   })
 
-  imagesLoaded(document.querySelector('.grid'), function(){
+  var container = document.querySelector('.grid')
+  var imagesHTML = container.innerHTML
+  var pack
+  var pending = false
+
+  imagesLoaded(container, function(){
     $('img').each(function(){
       $(this).attr('data-height', $(this).height())
       $(this).attr('data-width', $(this).width())
     })
-    new HorizontalGridPacking(document.querySelector('.grid'), {
+
+    pack = new HorizontalGridPacking(container, {
       height: 500,
       padding: 2
     })
+
+    window.addEventListener('resize', function queue() {
+      if (pending) return
+      pending = true
+      raf(function () {
+        pack.width = container.clientWidth
+        pack.height = Math.max(Math.round(window.outerHeight / Math.PI), 120)
+        pack.reload()
+        pending = false
+      })
+    })
   })
+
+  function append() {
+    var frag = document.createElement('div')
+    frag.innerHTML = imagesHTML
+    pack.append(frag.children)
+  }
 })
