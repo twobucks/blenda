@@ -1,3 +1,5 @@
+var imagesLoaded = require('imagesloaded')
+
 $(function(){
   $('.images').focus()
   $('.images li:first').addClass('active')
@@ -20,7 +22,7 @@ $(function(){
         var position = images.scrollLeft() + target.position().left
 
         // respect margins where they exist
-        if (! target.is(':first-child')) position += 40
+        // if (! target.is(':first-child')) position += 40
 
         // center it on page
         position -= (images.width() - target.width()) / 2
@@ -48,5 +50,13 @@ $(function(){
         markActive(active.next('li'))
         break
     }
+  })
+
+  imagesLoaded($('.grid'), function(){
+    new Masonry('.grid', {
+      itemSelector: 'li',
+      isFitWidth: true,
+      transitionDuration: 0
+    })
   })
 })

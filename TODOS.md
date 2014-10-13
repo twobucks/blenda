@@ -31,8 +31,12 @@
 # 10. Oct 2014
 [done] Center images and focus out other images
 
-* Gravatar
+# 13. Oct 2014
+* Create photo grid for the main page (http://tympanus.net/codrops/2014/05/15/recreating-the-design-samsung-grid-loading-effect/)
+
+* Create signup page (http://tympanus.net/Development/AnimatedResponsiveImageGrid/index3.html)
 * Most basic photo page (with bigger resolution)
+* Gravatar
 * Proper notifications and progress bar
 * Likes and followers
 * Display trending photos on the main page

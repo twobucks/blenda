@@ -12,7 +12,11 @@ router.get('/', function(req, res) {
   if (authenticated){
     photoStream.bind(this, req, res)()
   } else {
-    res.render('index');
+    listFiles('./public/images', function(err, images){
+      images = images.map(function(image) { return {url: '/images/' + image}})
+      console.log(images)
+      res.render('index', { images: images });
+    })
   }
 })
 

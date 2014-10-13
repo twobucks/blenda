@@ -2,3 +2,9 @@ extends layout
 
 block content
   a(href="/connect") Sign in with Dropbox
+
+  section(class="grid-wrap")
+    ul(class="grid")
+      for image in images
+        li
+          img(src=image.url)
