@@ -63,7 +63,13 @@ module.exports = function(email, job, done){
             })
 
             async.each(pics, function(pic, next){
-              Image.create({userId: user.id, fullName: pic}, function(err, image){
+              var imgOpts = {
+                userId: user.id,
+                fullName: pic,
+                host: "https://blenda.s3.amazonaws.com"
+              }
+
+              Image.create(imgOpts, function(err, image){
                 if (err) return next(err)
                 user.images.push(image.id)
                 user.save(next)

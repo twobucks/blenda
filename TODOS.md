@@ -36,7 +36,7 @@
 09. Oct 2014
 ---
 
-[done] basic horizontal scrolling with keyboard arrows
+[done] Basic horizontal scrolling with keyboard arrows
 [done] Animate scrolling effect
 
 10. Oct 2014
@@ -48,16 +48,19 @@
 ---
 
 [done] Create photo grid for the main page (http://tympanus.net/codrops/2014/05/15/recreating-the-design-samsung-grid-loading-effect/)
+[done] Make photo grid responsive (http://www.jongleberry.com/horizontal-grid-packing/)
 
-* Make photo grid responsive (http://www.jongleberry.com/horizontal-grid-packing/)
+14. Oct 2014
+---
 * Infinite scroll for the photo grid
 * Color containers for photos
-* Create signup page (http://tympanus.net/Development/AnimatedResponsiveImageGrid/index3.html)
+
 * Most basic photo page (with bigger resolution)
 * Gravatar
 * Proper notifications and progress bar
 * Likes and followers
 * Display trending photos on the main page
+* Create signup page (http://tympanus.net/Development/AnimatedResponsiveImageGrid/index3.html)
 * Photo upload (to Dropbox)
 * Dropbox supports web hooks for changes, we should support it too
 * Horizontal scroll with mouse? watch out, this shit is weird - spent 2 hrs on it and did nothing

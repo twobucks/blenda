@@ -5,6 +5,7 @@ var mongoose = require('mongoose'),
 
 var ImageSchema = new Schema({
   fullName: String,
+  host: String,
   userId: {
     type: Schema.Types.ObjectId,
     ref: 'User'
@@ -13,10 +14,8 @@ var ImageSchema = new Schema({
 
 ImageSchema.plugin(timestamps)
 
-var S3URL = "https://blenda.s3.amazonaws.com/"
-
-ImageSchema.methods.location = function(size){
-  return S3URL + picName(this.fullName, size)
+ImageSchema.methods.url = function(size){
+  return this.host + "/" + picName(this.fullName, size)
 }
 
 module.exports = mongoose.model('Image', ImageSchema)
