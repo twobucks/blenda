@@ -1,21 +1,21 @@
-var express = require('express');
-    path = require('path'),
-    favicon = require('static-favicon'),
-    logger = require('morgan'),
-    cookieParser = require('cookie-parser'),
-    session = require('express-session'),
-    bodyParser = require('body-parser'),
-    fs = require('fs'),
-    routes = require('./routes/index'),
-    app = express(),
-    db = require('./db'),
-    models_path = __dirname + '/models',
-    passport = require('passport'),
-    secrets = require('./config/secret-keys'),
+var express         = require('express');
+    path            = require('path'),
+    favicon         = require('static-favicon'),
+    logger          = require('morgan'),
+    cookieParser    = require('cookie-parser'),
+    session         = require('express-session'),
+    bodyParser      = require('body-parser'),
+    fs              = require('fs'),
+    routes          = require('./routes/index'),
+    app             = express(),
+    db              = require('./db'),
+    models_path     = __dirname + '/models',
+    passport        = require('passport'),
+    secrets         = require('./config/secret-keys'),
     DropboxStrategy = require('passport-dropbox-oauth2').Strategy,
-    config = require('./config/config'),
-    RedisStore = require('connect-redis')(session),
-    async = require('async')
+    config          = require('./config/config'),
+    RedisStore      = require('connect-redis')(session),
+    async           = require('async')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

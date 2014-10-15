@@ -1,7 +1,8 @@
 var mongoose = require('mongoose'),
     Schema   = mongoose.Schema,
     picName  = require('../utils/picture_name'),
-    timestamps = require('mongoose-timestamp')
+    timestamps = require('mongoose-timestamp'),
+    paginate   = require('mongoose-paginate')
 
 var ImageSchema = new Schema({
   fullName: String,
@@ -13,6 +14,7 @@ var ImageSchema = new Schema({
 })
 
 ImageSchema.plugin(timestamps)
+ImageSchema.plugin(paginate)
 
 ImageSchema.methods.url = function(size){
   return this.host + "/" + picName(this.fullName, size)

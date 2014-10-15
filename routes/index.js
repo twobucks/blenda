@@ -1,10 +1,13 @@
 var express     = require('express'),
-    router      = express.Router(),
-    Image       = require('./../models/image'),
+    paginate    = require('express-paginate')
     kue         = require('kue'),
+
+    jobs        = kue.createQueue(),
+    router      = express.Router(),
+
+    Image       = require('./../models/image'),
     pictureName = require('./../utils/picture_name'),
     listFiles   = require('./../utils/list_files')
-    jobs        = kue.createQueue(),
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -12,9 +15,34 @@ router.get('/', function(req, res) {
   if (authenticated){
     photoStream.bind(this, req, res)()
   } else {
-    Image.find().sort({updatedAt: -1}).exec(function(err, images){
-      res.render('index', { images: images });
-    })
+    // without pagination:
+    //
+    // Image.find().sort({updatedAt: -1}).exec(function(err, images){
+    //   res.render('index', {images: images})
+    // })
+
+    Image.paginate({}, req.query.page, req.query.limit,
+               function(err, pageCount,  images, itemCount){
+                 var images = images.map(function(image){
+                   return {url: image.url('large')}
+                 })
+                  res.format({
+                    html: function(){
+                      res.render('index', {
+                        images: images,
+                        pageCount: pageCount,
+                        itemCount: itemCount
+                      })
+                    },
+                    json: function(){
+                      res.json({
+                        object: 'list',
+                        has_more: paginate.hasNextPages(req)(pageCount),
+                        data: images
+                      })
+                    }
+                  })
+                }, {sortBy: { updatedAt: -1}})
   }
 })
 

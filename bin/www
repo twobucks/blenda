@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-var debug = require('debug')('app'),
-      app = require('../app'),
-      kue = require('kue'),
-      express = require('express'),
-      kueApp = express()
+var debug   = require('debug')('app'),
+    app     = require('../app'),
+    kue     = require('kue'),
+    express = require('express'),
+    kueApp  = express()
 
 kueApp.set('port', 3001)
 kueApp.use(kue.app)

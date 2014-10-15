@@ -1,7 +1,12 @@
 var imagesLoaded          = require('imagesloaded'),
-    raf                   = require('raf')
+    raf                   = require('raf'),
+    ScrollHandler         = require('./scroll_handler')
 
 $(function(){
+  $(window)
+    .off('scroll', function(e) { ScrollHandler(e, fetch)})
+    .on('scroll', function(e) { ScrollHandler(e, fetch)})
+
   $('.images').focus()
   $('.images li:first').addClass('active')
 
@@ -78,7 +83,30 @@ $(function(){
     })
   })
 
-  function append() {
+  var page = 1
+  function fetch(){
+    $.ajax({
+      url: '/',
+      dataType: 'json',
+      data: {page: ++page}
+    }).done(function(response){
+      var images = response.data
+      var fragment = document.createDocumentFragment()
+      images = $.each(images, function(i, image){
+        console.log(image)
+        var img = document.createElement('img')
+        img.setAttribute('src', image.url)
+        $(img).attr('data-height', 400)
+        $(img).attr('data-width', 600)
+
+        console.log(img)
+        fragment.appendChild(img)
+      })
+      pack.append(fragment)
+    })
+  }
+
+  function append(imagesHTML) {
     var frag = document.createElement('div')
     frag.innerHTML = imagesHTML
     pack.append(frag.children)
