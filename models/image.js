@@ -10,6 +10,11 @@ var ImageSchema = new Schema({
   userId: {
     type: Schema.Types.ObjectId,
     ref: 'User'
+  },
+  info: {
+    height: Number,
+    width: Number,
+    format: String
   }
 })
 

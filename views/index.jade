@@ -3,4 +3,4 @@ extends layout
 block content
   div(class="grid")
     for image in images
-      img(src=image.url)
+      img(src=image.url data-height=image.height data-width=image.width)

@@ -24,7 +24,9 @@ router.get('/', function(req, res) {
     Image.paginate({}, req.query.page, req.query.limit,
                function(err, pageCount,  images, itemCount){
                  var images = images.map(function(image){
-                   return {url: image.url('large')}
+                   return {url: image.url('large'),
+                           height: image.info.height,
+                           width: image.info.width}
                  })
                   res.format({
                     html: function(){

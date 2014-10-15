@@ -61,10 +61,6 @@ $(function(){
   var pending = false
 
   imagesLoaded(container, function(){
-    $('img').each(function(){
-      $(this).attr('data-height', $(this).height())
-      $(this).attr('data-width', $(this).width())
-    })
 
     pack = new HorizontalGridPacking(container, {
       height: 500,
@@ -96,8 +92,8 @@ $(function(){
         console.log(image)
         var img = document.createElement('img')
         img.setAttribute('src', image.url)
-        $(img).attr('data-height', 400)
-        $(img).attr('data-width', 600)
+        $(img).attr('data-height', image.height)
+        $(img).attr('data-width', image.width)
 
         console.log(img)
         fragment.appendChild(img)
