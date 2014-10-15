@@ -15,7 +15,8 @@ var express         = require('express');
     DropboxStrategy = require('passport-dropbox-oauth2').Strategy,
     config          = require('./config/config'),
     RedisStore      = require('connect-redis')(session),
-    async           = require('async')
+    async           = require('async'),
+    paginate        = require('express-paginate')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -35,6 +36,7 @@ app.use(require('stylus').middleware(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, 'dist')))
 
+app.use(paginate.middleware(10, 50))
 app.use('/', routes)
 
 // Auth setup
