@@ -90,12 +90,14 @@ $(function(){
       var fragment = document.createDocumentFragment()
       images = $.each(images, function(i, image){
         console.log(image)
-        var img = document.createElement('img')
-        img.setAttribute('src', image.url)
+        var img = document.createElement('div')
+        var style = "background: " + image.color +
+          " url('" + image.url + "') no-repeat left top;" +
+          " background-size: contain"
+        img.setAttribute('style', style)
         $(img).attr('data-height', image.height)
         $(img).attr('data-width', image.width)
 
-        console.log(img)
         fragment.appendChild(img)
       })
       pack.append(fragment)

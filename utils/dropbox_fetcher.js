@@ -31,10 +31,10 @@ module.exports = function(email, job, done){
 
           var performUpload = function(size, next){
             var upload   = new s3stream.upload({
-              "Bucket": "blenda",
-              "Key": picName(data.url, size),
-              "ACL": "public-read",
-              "ContentType": meta.mimeType
+              "Bucket":       "blenda",
+              "Key":          picName(data.url, size),
+              "ACL":          "public-read",
+              "ContentType":  meta.mimeType
             })
 
             var resize = resizer(size)

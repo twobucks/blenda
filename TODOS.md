@@ -52,11 +52,17 @@
 
 14. Oct 2014
 ---
-* Infinite scroll for the photo grid
-* Color containers for photos
 
+[done] Infinite scroll for the photo grid
+
+17. Oct 2014
+---
+
+[done] Color containers for photos
 * Most basic photo page (with bigger resolution)
 * Gravatar
+
+
 * Proper notifications and progress bar
 * Likes and followers
 * Display trending photos on the main page

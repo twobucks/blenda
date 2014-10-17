@@ -16,9 +16,14 @@ var express         = require('express');
     config          = require('./config/config'),
     RedisStore      = require('connect-redis')(session),
     async           = require('async'),
-    paginate        = require('express-paginate')
+    paginate        = require('express-paginate'),
+    slow            = require('connect-slow')
 
-// view engine setup
+app.use(slow({
+  url: /\.jpg$/i,
+  delay: 1000
+}))
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 

@@ -16,25 +16,28 @@ router.get('/', function(req, res) {
     photoStream.bind(this, req, res)()
   } else {
     Image.paginate({}, req.query.page, req.query.limit,
-               function(err, pageCount,  images, itemCount){
+               function(err, pageCount, images, itemCount){
                  var images = images.map(function(image){
-                   return {url: image.url('large'),
-                           height: image.info.height,
-                           width: image.info.width}
+                   return {
+                     url:     image.url('large'),
+                     height:  image.info.height,
+                     width:   image.info.width,
+                     color:   image.info.color
+                   }
                  })
                  res.format({
                    html: function(){
                      res.render('index', {
-                       images: images,
-                       pageCount: pageCount,
-                       itemCount: itemCount
+                       images:     images,
+                       pageCount:  pageCount,
+                       itemCount:  itemCount
                      })
                    },
                    json: function(){
                      res.json({
-                       object: 'list',
-                       has_more: paginate.hasNextPages(req)(pageCount),
-                       data: images
+                       object:    'list',
+                       has_more:  paginate.hasNextPages(req)(pageCount),
+                       data:      images
                      })
                    }
                  })
@@ -67,7 +70,6 @@ function processDropbox(user){
   job.on('failed', doneProcessing)
   job.save()
 }
-
 
 function photoStream(req, res){
   var user = req.user[0]

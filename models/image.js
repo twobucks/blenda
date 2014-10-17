@@ -14,7 +14,8 @@ var ImageSchema = new Schema({
   info: {
     height: Number,
     width: Number,
-    format: String
+    format: String,
+    color: String
   }
 })
 

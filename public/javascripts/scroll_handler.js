@@ -1,6 +1,8 @@
 var _throttleTimer = null
 var _throttleDelay = 100
 
+var offset = 10 // offset after witch a fetch will get executed
+
 function getDocHeight(){
     return Math.max(
         $(document).height(),
@@ -10,13 +12,10 @@ function getDocHeight(){
     )
 }
 
-function fetchMore(){
-}
-
 module.exports = function(e, next){
     clearTimeout(_throttleTimer);
     _throttleTimer = setTimeout(function () {
-        if ($(window).scrollTop() + $(window).height() > getDocHeight() - 400) {
+        if ($(window).scrollTop() + $(window).height() > getDocHeight() - offset) {
           next()
         }
 
