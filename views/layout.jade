@@ -2,13 +2,17 @@ doctype html
 html
   head
     title= title
+
     link(rel='stylesheet', href='/vendor/normalize.css/normalize.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/syntax.css')
     link(rel='stylesheet', href='/vendor/horizontal-grid-packing/dist/horizontal-grid-packing.css')
+
     script(src='/vendor/jquery/dist/jquery.min.js')
     script(src='/vendor/horizontal-grid-packing/dist/horizontal-grid-packing.js')
     script(src='/js/bundle.js')
+
+    block header
 
   body
     block content
