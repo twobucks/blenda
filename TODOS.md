@@ -91,4 +91,6 @@
 [Guys from Crispy Mountain wrote an article about photo grid](https://www.crispymtn.com/stories/the-algorithm-for-a-perfectly-balanced-photo-gallery), it's quite good.
 Consider [animated responsive image grid](http://tympanus.net/Development/AnimatedResponsiveImageGrid/index3.html) for the landing page.
 [Header effect](http://codepen.io/bassta/pen/iIskw)
+http://webdesignerwall.com/tutorials/responsive-design-in-3-steps
+http://webdesignerwall.com/tutorials/responsive-design-with-css3-media-queries
 
