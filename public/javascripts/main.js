@@ -12,9 +12,7 @@ $(function(){
   $(window).on('scroll', function parallax(){
     var scroll = $(window).scrollTop(),
         delta  = scroll - lastScroll
-    console.log(delta)
-    console.log(scroll)
-    if (delta > 0 && scroll < $('.bg').height() && !animating){
+    if (delta > 0 && delta < 100 && scroll < $('.bg').height() && !animating){
       animating = true
       $('html, body').animate({
           scrollTop: $(".grid").offset().top
@@ -22,7 +20,7 @@ $(function(){
         animating = false
       });
     }
-    if (delta < 0 && scroll <= $('.bg').height() && !animating){
+    if (delta < 0 && delta < 100 && scroll <= $('.bg').height() && !animating){
       animating = true
       $('html, body').animate({
           scrollTop: 0
@@ -88,5 +86,4 @@ $(function(){
     frag.innerHTML = imagesHTML
     pack.append(frag.children)
   }
-
 })
