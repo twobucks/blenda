@@ -3,9 +3,6 @@ var imagesLoaded          = require('imagesloaded'),
     ScrollHandler         = require('./scroll_handler')
 
 $(function(){
-  $(window).
-    off('scroll', function(e) { ScrollHandler(e, fetch) }).
-    on('scroll', function(e) { ScrollHandler(e, fetch) })
 
   var lastScroll = $(window).scrollTop();
   var animating = false
@@ -32,12 +29,16 @@ $(function(){
     lastScroll = scroll
   })
 
+  // image grid
+  $(window).
+    off('scroll', function(e) { ScrollHandler(e, fetch) }).
+    on('scroll', function(e) { ScrollHandler(e, fetch) })
 
-  var container  = document.querySelector('.grid'),
-      imagesHTML = container.innerHTML,
-      pending    = false
-      page       = 1
-      pack       = undefined
+  var container     = document.querySelector('.grid'),
+      imagesHTML    = container.innerHTML,
+      pending       = false
+      page          = 1
+      pack          = undefined
 
   imagesLoaded(container, function(){
     pack = new HorizontalGridPacking(container, {

@@ -1,9 +1,9 @@
 extends layout
 
 block content
-  div(class='bg')
+  section(class='bg active')
     h2(class="logo")
-  div(class="grid")
+  section(class="grid")
     for image in images
       img(class="image" data-height=image.height data-width=image.width
         style="background: " + image.color + " url('" + image.url + "') no-repeat center center; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover;")
