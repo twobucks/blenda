@@ -3,9 +3,37 @@ var imagesLoaded          = require('imagesloaded'),
     ScrollHandler         = require('./scroll_handler')
 
 $(function(){
-  $(window)
-    .off('scroll', function(e) { ScrollHandler(e, fetch)})
-    .on('scroll', function(e) { ScrollHandler(e, fetch)})
+  $(window).
+    off('scroll', function(e) { ScrollHandler(e, fetch) }).
+    on('scroll', function(e) { ScrollHandler(e, fetch) })
+
+  var lastScroll = $(window).scrollTop();
+  var animating = false
+  $(window).on('scroll', function parallax(){
+    var scroll = $(window).scrollTop(),
+        delta  = scroll - lastScroll
+    console.log(delta)
+    console.log(scroll)
+    if (delta > 0 && scroll < $('.bg').height() && !animating){
+      animating = true
+      $('html, body').animate({
+          scrollTop: $(".grid").offset().top
+      }, 1000, function(){
+        animating = false
+      });
+    }
+    if (delta < 0 && scroll <= $('.bg').height() && !animating){
+      animating = true
+      $('html, body').animate({
+          scrollTop: 0
+      }, 1000, function(){
+        animating = false
+        lastScroll = 0
+      });
+    }
+    lastScroll = scroll
+  })
+
 
   var container  = document.querySelector('.grid'),
       imagesHTML = container.innerHTML,
@@ -60,4 +88,5 @@ $(function(){
     frag.innerHTML = imagesHTML
     pack.append(frag.children)
   }
+
 })

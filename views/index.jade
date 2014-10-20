@@ -5,5 +5,5 @@ block content
     h2(class="logo")
   div(class="grid")
     for image in images
-      img(data-height=image.height data-width=image.width
-        style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))," + image.color + " url('" + image.url + "') no-repeat left top; background-size: contain")
+      img(class="image" data-height=image.height data-width=image.width
+        style="background: " + image.color + " url('" + image.url + "') no-repeat left top;")
