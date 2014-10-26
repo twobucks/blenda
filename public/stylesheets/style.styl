@@ -1,13 +1,20 @@
 *
   margin: 0
+  font-family:  'Raleway', sans-serif
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+
+:focus
+  outline: none
 
 html, body
   height: 100%
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+	-webkit-font-smoothing: antialiased
 a
   color: #00B7FF
 
-ul.images
+.images
   margin: 0
   font-size: 0
   padding: 0
@@ -30,15 +37,115 @@ ul.images
         z-index: 1
         position: relative
 
-.bg
-  background: url(../stars2.jpg) no-repeat center center
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  min-height: 100%
-  height: 100%
-  max-height: 100%
+section
+  padding-top: 5em
+
+  p
+    padding: 2em
+
+  .visual
+    max-width: 50%
+
+  h2, p
+    max-width: 30em
+
+
+.header, .features
+  color: #fff
+  background-color: #000
+  min-height: 45em
   position: relative
+  border-bottom: 2px solid white
+
+footer
+  min-height: 10em
+  color: #fff
+  padding-top: 5em
+  padding-bottom: 5em
+
+.header, footer
+  p, h1, h2, div
+    margin: 0 auto
+    text-align: center
+
+  .buttons
+    margin-top: 2em
+
+  .action
+    margin-top: 5em
+
+  input
+    margin-top: 2em
+    background: transparent
+    border: 1px solid white
+    padding: 1em
+
+    &[type="text"]
+      text-align: initial
+      border: none
+      margin: 0 auto
+      &:focus {
+        outline-width: 0
+      }
+
+.features
+  background-color: #0bb5ff
+  text-align: left
+
+footer
+  background-color: #000
+
+.feature
+  max-width: 30rem
+  margin: 0 auto
+  padding-bottom: 5rem
+
+  .title
+    font-weight: bold
+    margin-bottom: 0.5em
+  .thumb
+    float: left
+    padding-right: 2em
+    padding-bottom: 1em
+
+    i
+      display: block
+      font-size: 5em
+
+button
+  color: white;
+  background: #10bbf1;
+  padding: 1em
+  height: 56px
+  border: 2px solid #10bbf1;
+  -moz-transition: color 0.1s linear, background-color 0.1s linear, border-color 0.1s linear;
+  -ms-transition: color 0.1s linear, background-color 0.1s linear, border-color 0.1s linear;
+  -o-transition: color 0.1s linear, background-color 0.1s linear, border-color 0.1s linear;
+  -webkit-transition: color 0.1s linear, background-color 0.1s linear, border-color 0.1s linear;
+  transition: color 0.1s linear, background-color 0.1s linear, border-color 0.1s linear;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0);
+  border-color: white;
+
+  &:hover
+    color: #222222;
+    background-color: white;
+    border-color: white;
+
+  &:active
+    color: #222222;
+    background-color: #e5e5e5;
+    border-color: #e5e5e5;
+
+
+.left
+  float: left
+
+.right
+  float: right
+
 
 /* Custom, iPhone Retina */
 @media only screen and (min-width : 320px)
@@ -47,7 +154,9 @@ ul.images
     width: 100%
     background: url(../logo.png) no-repeat center;
     background-size: 300px
-    height: 300px
+    height: 10em
+    border: none
+    outline: none
 
 /* Extra Small Devices, Phones */
 @media only screen and (min-width : 480px)
@@ -56,7 +165,9 @@ ul.images
     width: 100%
     background: url(../logo.png) no-repeat center;
     background-size: 400px
-    height: 400px
+    height: 10em
+    border: none
+    outline: none
 
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px)
@@ -65,7 +176,9 @@ ul.images
     width: 100%
     background: url(../logo.png) no-repeat center;
     background-size: 500px
-    height: 500px
+    height: 12em
+    border: none
+    outline: none
 
 /* Medium Devices, Desktops */
 @media only screen and (min-width : 992px)
@@ -74,7 +187,9 @@ ul.images
     width: 100%
     background: url(../logo.png) no-repeat center;
     background-size: 700px
-    height: 700px
+    height: 15em
+    border: none
+    outline: none
 
 /* Large Devices, Wide Screens */
 @media only screen and (min-width : 1200px)
@@ -83,4 +198,6 @@ ul.images
     width: 100%
     background: url(../logo.png) no-repeat center;
     background-size: 800px
-    height: 800px
+    height: 20em
+    border: none
+    outline: none

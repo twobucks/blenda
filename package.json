@@ -7,7 +7,8 @@
     "start": "node_modules/.bin/nodemon --debug bin/www",
     "postinstall": "node_modules/.bin/bower install",
     "test": "node test/backend.js && node_modules/.bin/testem ci",
-    "watch": "node_modules/.bin/gulp watch"
+    "watch": "node_modules/.bin/gulp watch",
+    "landing": "PORT=80 node landing.js"
   },
   "repository": {
     "type": "git",

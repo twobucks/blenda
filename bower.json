@@ -4,6 +4,8 @@
   "dependencies": {
     "normalize.css": "~3.0.1",
     "jquery": "~2.1.1",
-    "horizontal-grid-packing": "~0.1.4"
+    "horizontal-grid-packing": "~0.1.4",
+    "wow": "~1.0.2",
+    "animate.css": "~3.2.0"
   }
 }
