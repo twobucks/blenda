@@ -6,9 +6,7 @@ var express         = require('express');
     bodyParser      = require('body-parser'),
     fs              = require('fs'),
     app             = express(),
-    db              = require('./db'),
     secrets         = require('./config/secret-keys'),
-    config          = require('./config/config')
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
