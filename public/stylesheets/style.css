@@ -162,74 +162,47 @@ button:active {
 .right {
   float: right;
 }
-@media only screen and (min-width : 100px) {
-  .logo {
-    text-align: center;
-    width: 100%;
-    background: url("/s3-us-west-2.amazonaws.com/blenda/logo.png") no-repeat center;
-    background-size: 50px;
-    height: 5em;
-    border: none;
-    outline: none;
-  }
+.logo {
+  text-align: center;
+  width: 100%;
+  background: url("https://s3-us-west-2.amazonaws.com/blenda/logo.png") no-repeat center;
+  background-size: 200px;
+  height: 9em;
+  border: none;
+  outline: none;
 }
 /* Custom, iPhone Retina */
 @media only screen and (min-width : 320px) {
   .logo {
-    text-align: center;
-    width: 100%;
-    background: url("https://s3-us-west-2.amazonaws.com/blenda/logo.png") no-repeat center;
     background-size: 300px;
     height: 10em;
-    border: none;
-    outline: none;
   }
 }
 /* Extra Small Devices, Phones */
 @media only screen and (min-width : 480px) {
   .logo {
-    text-align: center;
-    width: 100%;
-    background: url("https://s3-us-west-2.amazonaws.com/blenda/logo.png") no-repeat center;
     background-size: 400px;
     height: 10em;
-    border: none;
-    outline: none;
   }
 }
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) {
   .logo {
-    text-align: center;
-    width: 100%;
-    background: url("https://s3-us-west-2.amazonaws.com/blenda/logo.png") no-repeat center;
     background-size: 500px;
     height: 12em;
-    border: none;
-    outline: none;
   }
 }
 /* Medium Devices, Desktops */
 @media only screen and (min-width : 992px) {
   .logo {
-    text-align: center;
-    width: 100%;
-    background: url("https://s3-us-west-2.amazonaws.com/blenda/logo.png") no-repeat center;
     background-size: 700px;
     height: 15em;
-    border: none;
-    outline: none;
   }
 }
 /* Large Devices, Wide Screens */
 @media only screen and (min-width : 1200px) {
   .logo {
-    text-align: center;
-    width: 100%;
-    background: url("https://s3-us-west-2.amazonaws.com/blenda/logo.png") no-repeat center;
     background-size: 800px;
     height: 20em;
-    border: none;
-    outline: none;
   }
 }
