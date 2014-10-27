@@ -1,12 +1,15 @@
-var express         = require('express');
-    path            = require('path'),
-    favicon         = require('static-favicon'),
-    logger          = require('morgan'),
-    cookieParser    = require('cookie-parser'),
-    bodyParser      = require('body-parser'),
-    fs              = require('fs'),
-    app             = express(),
-    secrets         = require('./config/secret-keys'),
+var express      = require('express');
+    path         = require('path'),
+    favicon      = require('static-favicon'),
+    logger       = require('morgan'),
+    cookieParser = require('cookie-parser'),
+    Cookies      = require('cookies'),
+    bodyParser   = require('body-parser'),
+    fs           = require('fs'),
+    app          = express(),
+    secrets      = require('./config/secret-keys'),
+    db           = require('./db'),
+    BetaInvite   = require('./models/beta_invite')
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -22,7 +25,21 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, 'dist')))
 
 app.get('/', function(req, res){
-  res.render('landing')
+
+  var cookies = new Cookies(req, res)
+  res.render('landing', {invited: cookies.get('invited')})
+})
+
+app.post('/join', function(req, res){
+  var email = req.body.email,
+      cookies = new Cookies(req, res)
+  BetaInvite.findOrCreate({email: email}, function(err){
+    if (!err) cookies.set('invited', true)
+    res.format({
+      html: function(){ res.redirect('/') },
+      json: function(){ res.end('{"status" : 200}')}
+    })
+  })
 })
 
 /// catch 404 and forward to error handler

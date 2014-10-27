@@ -9,7 +9,6 @@ var express         = require('express');
     routes          = require('./routes/index'),
     app             = express(),
     db              = require('./db'),
-    models_path     = __dirname + '/models',
     passport        = require('passport'),
     secrets         = require('./config/secret-keys'),
     DropboxStrategy = require('passport-dropbox-oauth2').Strategy,

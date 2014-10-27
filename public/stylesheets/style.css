@@ -54,6 +54,9 @@ section h2,
 section p {
   max-width: 30em;
 }
+.header * {
+  padding-top: 1rem;
+}
 .header,
 .features {
   color: #fff;

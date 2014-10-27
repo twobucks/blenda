@@ -10,19 +10,41 @@ html
     link(href="http://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css")
     link(href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet" type="text/css")
 
+    script(src='/vendor/jquery/dist/jquery.min.js')
     script(src='/vendor/wow/dist/wow.min.js')
-    script new WOW().init();
+    script
+      | new WOW().init();
+      | $(function(){
+      |  $('form').submit(function(e){
+      |   var email = $(this).find('input').val()
+      |   $.ajax({
+      |     url: '/join',
+      |     dataType: 'json',
+      |     type: 'POST',
+      |     data: {email: email}
+      |   }).done(function(){
+      |     $('div.action').html("<h2>Thank you for supporting us</h2><p>We'll reach you when we launch the beta</p>")
+      |     $('footer.action').html('')
+      |   })
+      |   e.preventDefault()
+      |   return false
+      |  })
+      | })
 
   body
     header(class='header active' role="header")
       div(class="wow fadeInDown logo")
       h1(class="wow fadeInUp" 'data-wow-duration'='2s') Inspiring photography, with the power of Dropbox
       div(class="action")
-        h2 Coming soon, signup now for early access
-        form(action="javascript: void(0)" method="post")
-          div(class="buttons")
-            input(type="text" autofocus='true' placeholder='Email')
-            button(type="submit") Signup for Beta
+        if invited
+          h2 Thank you for supporting us
+          p We'll reach you when we launch the beta
+        else
+          h2 Coming soon, signup now for early access
+          form(action="/join" method="post")
+            div(class="buttons")
+              input(type="text" autofocus='true' placeholder='Email' name='email')
+              button(type="submit") Signup for Beta
 
     section(class='features')
       div(class='feature wow fadeInLeft')
@@ -51,9 +73,10 @@ html
         | Our interface is very simple and easy to use. We strongly value
         | minimalism and we're focused to make photo sharing fun and simple again.
 
-     footer
-       h2 Join the party, take your early access seat
-       form(action="javascript: void(0)" method="post")
-         div(class="buttons")
-           input(type="text" placeholder='Email')
-           button(type="submit") Signup for Beta
+     footer(class='action')
+       unless invited
+         h2 Join the party, take your early access seat
+         form(action="/join" method="post")
+           div(class="buttons")
+             input(type="text" placeholder='Email' name='email')
+             button(type="submit") Signup for Beta
