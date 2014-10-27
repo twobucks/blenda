@@ -23,7 +23,7 @@ html
       |     type: 'POST',
       |     data: {email: email}
       |   }).done(function(){
-      |     $('div.action').html("<h2>Thank you for supporting us</h2><p>We'll reach you when we launch the beta</p>")
+      |     $('div.action').html("<h2>Thank you for supporting us</h2><p>We'll reach you when the beta is launched</p>")
       |     $('footer.action').html('')
       |   })
       |   e.preventDefault()
@@ -38,7 +38,7 @@ html
       div(class="action")
         if invited
           h2 Thank you for supporting us
-          p We'll reach you when we launch the beta
+          p We'll reach you when the beta is launched
         else
           h2 Coming soon, signup now for early access
           form(action="/join" method="post")
