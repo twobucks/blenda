@@ -24,6 +24,7 @@ html
       |     data: {email: email}
       |   }).done(function(){
       |     $('div.action').html("<h2>Thank you for supporting us</h2><p>We'll reach you when the beta is launched</p>")
+      |     $('footer.action').html("<h2>Beta is comming out soon</h2><p>Thanks for your support</p>")
       |     $('footer.action').html('')
       |   })
       |   e.preventDefault()
@@ -82,7 +83,10 @@ html
         | minimalism and we're focused to make photo sharing fun and simple again.
 
      footer(class='action')
-       unless invited
+       if invited
+         h2 Beta is coming out soon
+         p Thanks for your support
+       else
          h2 Join the party, take your early access seat
          form(action="/join" method="post")
            div(class="buttons")
