@@ -43,6 +43,7 @@ a {
 }
 section {
   padding-top: 5em;
+  border-top: 2px solid #fff;
 }
 section p {
   padding: 2em;
@@ -54,6 +55,16 @@ section h2,
 section p {
   max-width: 30em;
 }
+.header {
+  background-image: url("/lampice-dark-optimized.jpg");
+  background-position: center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+}
 .header * {
   padding-top: 1rem;
 }
@@ -61,9 +72,7 @@ section p {
 .features {
   color: #fff;
   background-color: #000;
-  min-height: 45em;
   position: relative;
-  border-bottom: 2px solid #fff;
 }
 footer {
   min-height: 10em;
@@ -108,7 +117,6 @@ footer input[type="text"]:focus {
   outline-width: 0;
 }
 .features {
-  background-color: #0bb5ff;
   text-align: left;
 }
 footer {
@@ -166,7 +174,6 @@ button:active {
   float: right;
 }
 .logo {
-  text-align: center;
   width: 100%;
   background: url("https://s3-us-west-2.amazonaws.com/blenda/logo.png") no-repeat center;
   background-size: 200px;
