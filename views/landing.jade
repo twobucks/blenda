@@ -23,9 +23,8 @@ html
       |     type: 'POST',
       |     data: {email: email}
       |   }).done(function(){
-      |     $('div.action').html("<h2>Thank you for supporting us</h2><p>We'll reach you when the beta is launched</p>")
-      |     $('footer.action').html("<h2>Beta is comming out soon</h2><p>Thanks for your support</p>")
-      |     $('footer.action').html('')
+      |     $('div.action').html("<p>We'll reach you when the beta is launched</p>")
+      |     $('footer.action').html("<p>Thanks for your support</p>")
       |   })
       |   e.preventDefault()
       |   return false
@@ -42,14 +41,13 @@ html
 
   body
     header(class='header active' role="header")
-      div(class="wow fadeInDown logo")
-      h1(class="wow fadeInUp" 'data-wow-duration'='2s') Photography is about sharing
+      div(class="logo")
+      h1(class="wow fadeIn title") Amazing photography
+      h2(class="wow fadeInDown subtitle") from your Dropbox
       div(class="action")
         if invited
-          h2 Thank you for supporting us
           p We'll reach you when the beta is launched
         else
-          h2 Coming soon, signup now for early access
           form(action="/join" method="post")
             div(class="buttons")
               input(type="text" autofocus='true' placeholder='you@ro.ck' name='email')
@@ -63,7 +61,7 @@ html
           h2(class='title') Your photos are always with you
         | Using Dropbox means that your photos always stay with you, in the same
         | resolution. Stop worrying about losing your photos, they never leave
-        | the safety of your local Dropbox folder.
+        | the safety of your Dropbox.
 
       div(class='feature wow fadeInLeft')
         div(class='thumb')
@@ -84,7 +82,6 @@ html
 
      footer(class='action')
        if invited
-         h2 Beta is coming out soon
          p Thanks for your support
        else
          h2 Join the party, take your early access seat

@@ -51,7 +51,7 @@ section
     max-width: 30em
 
 .header
-  background-image: url(/lampice-dark-optimized.jpg)
+  background-image: url(/bg.jpg)
   background-position: center;
   background-attachment: fixed
   -webkit-background-size: cover;
@@ -75,29 +75,13 @@ footer
   padding-bottom: 5em
 
 .header, footer
-  p, h1, h2, div
+  p, h1, h2, .buttons, .action
     margin: 0 auto
     text-align: center
 
   .buttons
     margin-top: 2em
 
-  .action
-    margin-top: 5em
-
-  input
-    margin-top: 2em
-    background: transparent
-    border: 1px solid white
-    padding: 1em
-
-    &[type="text"]
-      text-align: initial
-      border: none
-      margin: 0 auto
-      &:focus {
-        outline-width: 0
-      }
 
 .features
   // background-color: #0bb5ff
@@ -109,19 +93,10 @@ footer
 .feature
   max-width: 30rem
   margin: 0 auto
-  padding-bottom: 5rem
 
   .title
     font-weight: bold
     margin-bottom: 0.5em
-  .thumb
-    float: left
-    padding-right: 2rem
-    padding-bottom: 2rem
-
-    i
-      display: block
-      font-size: 5em
 
 button
   color: white;
@@ -158,39 +133,129 @@ button
   float: right
 
 .logo
+  background: url(/logo.png) no-repeat center;
+  background-size: 80%
   width: 100%
-  background: url(https://s3-us-west-2.amazonaws.com/blenda/logo.png) no-repeat center;
-  background-size: 200px
-  height: 9em
+  max-width: 100%
+  height: 20vh
   border: none
   outline: none
 
+input
+  margin-top: 2em
+  background: transparent
+  border: 1px solid white
+  padding: 1em
+
+  text-align: center
+  border: none
+  margin: 0 auto
+  &:focus
+    outline-width: 0
+
+.header
+  h1
+    font-size: 5vh
+    padding-top: 25vh
+  h2
+    font-size: 2vh
+
+.thumb
+  float: left
+
+  i
+    display: block
+    font-size: 5em
+
+input
+  margin-top: 2em
+  background: transparent
+  border: 1px solid white
+  padding: 1em
+
+  text-align: initial
+  border: none
+  margin: 0 auto
+  &:focus
+    outline-width: 0
+
+.feature
+  text-align: center
+  padding-left: 1rem
+  padding-right: 1rem
+  padding-bottom: 2rem
+
+.thumb
+  text-align: center
+  width: 100%
+
+.logo
+  background-size: 80%
+  width: 80%
+  max-width: 80%
+  margin: 0 auto
+
+.header
+  h1
+    font-size: 8vh
+    padding-top: 15vh
+  h2
+    font-size: 4vh
+
+input
+  text-align: center
+
 /* Custom, iPhone Retina */
 @media only screen and (min-width : 320px)
-  .logo
-    background-size: 300px
-    height: 10em
+  input
+    text-align: center
+    width: 100%
 
 /* Extra Small Devices, Phones */
 @media only screen and (min-width : 480px)
-  .logo
-    background-size: 400px
-    height: 10em
+  .feature
+    text-align: initial
+    padding-bottom: 5rem
+
+  .thumb
+    text-align: left
+    width: initial
+    padding-bottom: 5rem
+    padding-right:  1rem
+
+  .header
+    h1
+      font-size: 10vh
+      padding-top: 20vh
+    h2
+      font-size: 5vh
 
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px)
   .logo
-    background-size: 500px
-    height: 12em
+    border: none
+    max-width: 30vh
+    margin-left: 10vh
+
+  .header
+    h1
+      font-size: 10vh
+    h2
+      font-size: 5vh
+
+  input
+    text-align: initial
+    width: initial
 
 /* Medium Devices, Desktops */
 @media only screen and (min-width : 992px)
-  .logo
-    background-size: 700px
-    height: 15em
+  .header
+    h1
+      padding-top: 10vh
 
 /* Large Devices, Wide Screens */
 @media only screen and (min-width : 1200px)
-  .logo
-    background-size: 800px
-    height: 20em
+  .header
+    h1
+      padding-top: 20vh
+
