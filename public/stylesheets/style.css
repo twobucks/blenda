@@ -221,7 +221,7 @@ input {
   .header h2 {
     font-size: 1.5em;
   }
-  .buttons {
+  .header .buttons {
     margin-top: 5%;
   }
   input {
@@ -261,6 +261,9 @@ input {
   }
   .header h2 {
     font-size: 3em;
+  }
+  footer .buttons {
+    padding-top: 2em;
   }
   input {
     text-align: initial;
