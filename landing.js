@@ -3,7 +3,6 @@ var express      = require('express');
     favicon      = require('serve-favicon'),
     logger       = require('morgan'),
     cookieParser = require('cookie-parser'),
-    Cookies      = require('cookies'),
     bodyParser   = require('body-parser'),
     fs           = require('fs'),
     app          = express(),
@@ -25,16 +24,12 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, 'dist')))
 
 app.get('/', function(req, res){
-
-  var cookies = new Cookies(req, res)
-  res.render('landing', {invited: cookies.get('invited')})
+  res.render('landing')
 })
 
 app.post('/join', function(req, res){
-  var email = req.body.email,
-      cookies = new Cookies(req, res)
+  var email = req.body.email
   BetaInvite.findOrCreate({email: email}, function(err){
-    if (!err) cookies.set('invited', true)
     res.format({
       html: function(){ res.redirect('/') },
       json: function(){ res.end('{"status" : 200}')}

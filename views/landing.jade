@@ -9,14 +9,22 @@ html
     link(rel='stylesheet', href='/vendor/animate.css/animate.css')
     link(href="//fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css")
     link(href="//code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet" type="text/css")
+
     link(rel="shortcut icon" href="/favicon.ico?v=3" type="image/x-icon")
     link(rel="icon" href="/favicon.ico?v=3" type="image/x-icon")
 
     script(src='/vendor/jquery/dist/jquery.min.js')
     script(src='/vendor/wow/dist/wow.min.js')
     script
-      | new WOW().init();
+      | new WOW({mobile: false}).init();
       | $(function(){
+      |  $(".email").keypress(function(e){
+      |     var keyCode = e.keyCode ? e.keyCode : e.which ? e.which : e.charCode;
+      |     if (keyCode === 13){
+      |       $('form').first().submit()
+      |       return false
+      |     }
+      |  })
       |  $('form').submit(function(e){
       |   var email = $(this).find('input').val()
       |   $.ajax({
@@ -25,7 +33,7 @@ html
       |     type: 'POST',
       |     data: {email: email}
       |   }).done(function(){
-      |     $('div.action').html("<p>We'll reach you when the beta is launched</p>")
+      |     $('div.buttons').html("<p>We'll reach you when the beta is launched</p>")
       |     $('footer.action').html("<p>Thanks for your support</p>")
       |   })
       |   e.preventDefault()
@@ -47,13 +55,10 @@ html
       h1(class="wow fadeIn title") Amazing photography
       h2(class="wow fadeInDown subtitle") from your Dropbox
       div(class="action")
-        if invited
-          p We'll reach you when the beta is launched
-        else
-          form(action="/join" method="post")
-            div(class="buttons")
-              input(type="text" autofocus='true' placeholder='you@ro.ck' name='email')
-              button(type="submit") Signup for Beta
+        form(action="/join" method="post")
+          div(class="buttons")
+            input(class='email' type="text" autofocus='true' placeholder='you@ro.ck' name='email')
+            button(type="submit") Signup for Beta
 
     section(class='features')
       div(class='feature wow fadeInLeft')
@@ -83,11 +88,8 @@ html
         | minimalism and we're focused to make photo sharing fun and simple again.
 
      footer(class='action')
-       if invited
-         p Thanks for your support
-       else
-         h2 Join the party, take your early access seat
-         form(action="/join" method="post")
-           div(class="buttons")
-             input(type="text" placeholder='you@ro.ck' name='email')
-             button(type="submit") Signup for Beta
+       h2 Join the party, take your early access seat
+       form(action="/join" method="post")
+         div(class="buttons")
+           input(class='email' type="text" placeholder='you@ro.ck' name='email')
+           button(type="submit") Signup for Beta
