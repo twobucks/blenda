@@ -62,7 +62,7 @@ html
       h1(class="wow fadeIn title") Amazing photography
       h2(class="wow fadeInDown subtitle") from your Dropbox
       div(class="action")
-        form(action="/join" method="post")
+        form(action="/join" method="post" autocomplete="off")
           div(class="buttons")
             input(class='email' type="text" autofocus='true' placeholder='you@ro.ck' name='email')
             button(type="submit") Signup for Beta
@@ -98,7 +98,7 @@ html
 
      footer(class='action')
        h2 Join the party, take your early access seat
-       form(action="/join" method="post")
+       form(action="/join" method="post" autocomplete="off")
          div(class="buttons")
            input(class='email' type="text" placeholder='you@ro.ck' name='email')
            button(type="submit") Signup for Beta
