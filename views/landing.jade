@@ -20,21 +20,26 @@ html
       | $(function(){
       |  $(".email").keypress(function(e){
       |     var keyCode = e.keyCode ? e.keyCode : e.which ? e.which : e.charCode;
+      |     $('.failure').addClass('hidden')
       |     if (keyCode === 13){
-      |       $('form').first().submit()
+      |       $(this).parent().submit()
       |       return false
       |     }
       |  })
       |  $('form').submit(function(e){
       |   var email = $(this).find('input').val()
+      |   if (!/@/.test(email)) {
+      |     $(this).find('.failure').removeClass('hidden')
+      |     return false
+      |   }
       |   $.ajax({
       |     url: '/join',
       |     dataType: 'json',
       |     type: 'POST',
       |     data: {email: email}
       |   }).done(function(){
-      |     $('div.buttons').html("<p>We'll reach you when the beta is launched</p>")
-      |     $('footer.action').html("<p>Thanks for your support</p>")
+      |     $('.active').addClass('hidden')
+      |     $('.success').removeClass('hidden')
       |   })
       |   e.preventDefault()
       |   return false
@@ -50,15 +55,17 @@ html
       | ga('send', 'pageview');
 
   body
-    header(class='header active' role="header")
+    header(class='header' role="header")
       div(class="logo")
       h1(class="wow fadeIn title") Amazing photography
       h2(class="wow fadeInDown subtitle") from your Dropbox
       div(class="action")
         form(action="/join" method="post")
           div(class="buttons")
-            input(class='email' type="text" autofocus='true' placeholder='you@ro.ck' name='email')
-            button(type="submit") Signup for Beta
+            p(class="success hidden") We'll reach you when the beta is launched
+            input(class='email active' type="text" autofocus='true' placeholder='you@ro.ck' name='email')
+            button(class='active' type="submit") Signup for Beta
+            p(class="failure hidden") Please enter a valid email
 
     section(class='features')
       div(class='feature wow fadeInLeft')
@@ -88,8 +95,10 @@ html
         | minimalism and we're focused to make photo sharing fun and simple again.
 
      footer(class='action')
-       h2 Join the party, take your early access seat
+       h2(class='active') Join the party, take your early access seat
        form(action="/join" method="post")
          div(class="buttons")
-           input(class='email' type="text" placeholder='you@ro.ck' name='email')
-           button(type="submit") Signup for Beta
+           p(class="success hidden") Thanks for your support
+           input(class='email active' type="text" placeholder='you@ro.ck' name='email')
+           button(class='active' type="submit") Signup for Beta
+           p(class="failure hidden" style='margin-top: 10px') Please enter a valid email
