@@ -2173,6 +2173,35 @@
       "from": "s3-upload-stream@>=1.0.2 <2.0.0",
       "resolved": "https://registry.npmjs.org/s3-upload-stream/-/s3-upload-stream-1.0.2.tgz"
     },
+    "serve-favicon": {
+      "version": "2.1.6",
+      "from": "serve-favicon@*",
+      "resolved": "https://registry.npmjs.org/serve-favicon/-/serve-favicon-2.1.6.tgz",
+      "dependencies": {
+        "etag": {
+          "version": "1.5.0",
+          "from": "etag@>=1.5.0 <1.6.0",
+          "resolved": "https://registry.npmjs.org/etag/-/etag-1.5.0.tgz",
+          "dependencies": {
+            "crc": {
+              "version": "3.0.0",
+              "from": "crc@3.0.0",
+              "resolved": "https://registry.npmjs.org/crc/-/crc-3.0.0.tgz"
+            }
+          }
+        },
+        "fresh": {
+          "version": "0.2.4",
+          "from": "fresh@0.2.4",
+          "resolved": "https://registry.npmjs.org/fresh/-/fresh-0.2.4.tgz"
+        },
+        "ms": {
+          "version": "0.6.2",
+          "from": "ms@0.6.2",
+          "resolved": "https://registry.npmjs.org/ms/-/ms-0.6.2.tgz"
+        }
+      }
+    },
     "sharp": {
       "version": "0.6.2",
       "from": "sharp@*",
@@ -2189,11 +2218,6 @@
           "resolved": "https://registry.npmjs.org/bluebird/-/bluebird-2.3.2.tgz"
         }
       }
-    },
-    "static-favicon": {
-      "version": "1.0.2",
-      "from": "static-favicon@~1.0.0",
-      "resolved": "https://registry.npmjs.org/static-favicon/-/static-favicon-1.0.2.tgz"
     },
     "stylus": {
       "version": "0.42.3",
