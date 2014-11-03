@@ -15,5 +15,9 @@ var BetaInviteSchema = new Schema({
 BetaInviteSchema.plugin(findOrCreate)
 BetaInviteSchema.plugin(timestamps)
 
+BetaInviteSchema.path('email').validate(function (value) {
+  return /@/i.test(value);
+}, 'Invalid email');
+
 module.exports = mongoose.model('BetaInvite', BetaInviteSchema)
 

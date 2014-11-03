@@ -21,15 +21,17 @@ html
       |  $(".email").keypress(function(e){
       |     var keyCode = e.keyCode ? e.keyCode : e.which ? e.which : e.charCode;
       |     $('.failure').addClass('hidden')
+      |     $('.success').addClass('hidden')
       |     if (keyCode === 13){
       |       $(this).parent().submit()
       |       return false
       |     }
       |  })
       |  $('form').submit(function(e){
-      |   var email = $(this).find('input').val()
+      |   var $this = $(this),
+      |       email = $this.find('input').val()
       |   if (!/@/.test(email)) {
-      |     $(this).find('.failure').removeClass('hidden')
+      |     $this.find('.failure').removeClass('hidden')
       |     return false
       |   }
       |   $.ajax({
@@ -38,8 +40,8 @@ html
       |     type: 'POST',
       |     data: {email: email}
       |   }).done(function(){
-      |     $('.active').addClass('hidden')
-      |     $('.success').removeClass('hidden')
+      |     $this.find('.email').val('')
+      |     $this.find('.success').removeClass('hidden')
       |   })
       |   e.preventDefault()
       |   return false
@@ -62,10 +64,10 @@ html
       div(class="action")
         form(action="/join" method="post")
           div(class="buttons")
-            p(class="success hidden") We'll reach you when the beta is launched
-            input(class='email active' type="text" autofocus='true' placeholder='you@ro.ck' name='email')
-            button(class='active' type="submit") Signup for Beta
+            input(class='email' type="text" autofocus='true' placeholder='you@ro.ck' name='email')
+            button(type="submit") Signup for Beta
             p(class="failure hidden") Please enter a valid email
+            p(class="success hidden") Thanks, we'll reach you when the beta is launched
 
     section(class='features')
       div(class='feature wow fadeInLeft')
@@ -95,10 +97,10 @@ html
         | minimalism and we're focused to make photo sharing fun and simple again.
 
      footer(class='action')
-       h2(class='active') Join the party, take your early access seat
+       h2 Join the party, take your early access seat
        form(action="/join" method="post")
          div(class="buttons")
-           p(class="success hidden") Thanks for your support
-           input(class='email active' type="text" placeholder='you@ro.ck' name='email')
-           button(class='active' type="submit") Signup for Beta
+           input(class='email' type="text" placeholder='you@ro.ck' name='email')
+           button(type="submit") Signup for Beta
            p(class="failure hidden" style='margin-top: 10px') Please enter a valid email
+           p(class="success hidden" style='margin-top: 10px') Thanks, we'll reach you when the beta is launched
