@@ -53,8 +53,8 @@
     "request": "^2.44.0",
     "riotjs": "^1.0.4",
     "s3-upload-stream": "^1.0.2",
+    "serve-favicon": "^2.1.6",
     "sharp": "^0.6.2",
-    "static-favicon": "~1.0.0",
     "stylus": "0.42.3"
   },
   "devDependencies": {
