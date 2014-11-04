@@ -18,6 +18,7 @@ html
     script
       | new WOW({mobile: false}).init();
       | $(function(){
+      |  $('[autofocus]:not(:focus)').eq(0).focus();
       |  $(".email").keypress(function(e){
       |     var keyCode = e.keyCode ? e.keyCode : e.which ? e.which : e.charCode;
       |     $('.failure').addClass('hidden')
