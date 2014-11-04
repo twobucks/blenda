@@ -39,9 +39,13 @@ app.post('/join', function(req, res){
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+  if (app.get('env') === 'development') {
+    var err = new Error('Not Found')
+    err.status = 404
+    next(err)
+  } else {
+    res.redirect('/')
+  }
 });
 
 // development error handler
