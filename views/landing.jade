@@ -31,7 +31,7 @@ html
       |  $('form').submit(function(e){
       |   var $this = $(this),
       |       email = $this.find('input').val()
-      |   if (!/@/.test(email)) {
+      |   if (!/^.+@.+$/.test(email)) {
       |     $this.find('.failure').removeClass('hidden')
       |     return false
       |   }
@@ -67,8 +67,8 @@ html
           div(class="buttons")
             input(class='email' type="text" autofocus='true' placeholder='you@ro.ck' name='email')
             button(type="submit") Signup for Beta
-            p(class="failure hidden") Please enter a valid email
-            p(class="success hidden") Thanks, we'll reach you when the beta is launched
+            p(class="failure hidden") Heh, that was funny. Please enter a valid email now.
+            p(class="success hidden") Thanks, we'll reach you when the beta is launched.
 
     section(class='features')
       div(class='feature wow fadeInLeft')
