@@ -31,7 +31,7 @@ html
       |  $('form').submit(function(e){
       |   var $this = $(this),
       |       email = $this.find('input').val()
-      |   if (!/^.+@.+$/.test(email)) {
+      |   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
       |     $this.find('.failure').removeClass('hidden')
       |     return false
       |   }
