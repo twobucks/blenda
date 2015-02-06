@@ -21,7 +21,7 @@ We don't have a proper authentication system. Sign in with Dropbox and enjoy - a
 
 ## Competition
 
-500px and Flickr. 
+500px and Flickr.
 
 500px sucks because they bill their service and are annoying with that.
 Flickr sucks because its owned by Yahoo.
@@ -33,6 +33,7 @@ Flickr sucks because its owned by Yahoo.
 3. Photo upload (to Dropbox)
 4. System for likes and followers
 5. Display trending photos on the main page
+6. Billing system
 
 ## Development
 
@@ -58,5 +59,5 @@ npm run watch # will start reloader
 npm test # will run tests
 ```
 
-We use [sharp](https://github.com/lovell/sharp#readme) for image resizing and it depends on 
+We use [sharp](https://github.com/lovell/sharp#readme) for image resizing and it depends on
 [libvips](https://github.com/jcupitt/libvips#readme), make sure you have `libvips` installed on your machine.
