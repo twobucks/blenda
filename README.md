@@ -60,7 +60,3 @@ npm test # will run tests
 
 We use [sharp](https://github.com/lovell/sharp#readme) for image resizing and it depends on 
 [libvips](https://github.com/jcupitt/libvips#readme), make sure you have `libvips` installed on your machine.
-
-## License
-
-MIT
