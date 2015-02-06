@@ -44,6 +44,7 @@ Technology:
 * [Express](https://github.com/strongloop/express)
 * [riot.js](https://github.com/muut/riotjs)
 * [MongoDB](http://www.mongodb.org/)
+* [redis](http://redis.io/)
 
 First make sure you have MongoDB installed and that you have started the Mongo server.
 
